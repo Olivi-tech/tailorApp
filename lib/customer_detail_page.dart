@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tailor/add_item.dart';
+import 'package:tailor/add_customer.dart';
 
 import 'model_add_customer.dart';
 
 class CustomerDetailPage extends StatelessWidget {
   Map<String, dynamic>? map = {};
+
   // final String fullName;
   // final String phoneNumber;
   // final String address;

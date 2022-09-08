@@ -400,6 +400,11 @@ class ModelAddCustomer {
   String? inseam;
   String? shoulder;
   String? calf;
+
+  // String toString() {
+  //   return 'ModelAddCustomer{fullName: $fullName, phoneNumber: $phoneNumber, address: $address, collar: $collar, waist: $waist, armLength: $armLength, biceps: $biceps, wrist: $wrist, length: $length, thigh: $thigh, chest: $chest, inseam: $inseam, shoulder: $shoulder, calf: $calf}';
+  // }
+
   static String keyFullName = 'fullName';
   static String keyPhoneNumber = 'phoneNumber';
   static String keyAddress = 'address';
@@ -414,6 +419,7 @@ class ModelAddCustomer {
   static String keyThigh = 'thigh';
   static String keyLength = 'length';
   static String keyCalf = 'calf';
+
   ModelAddCustomer({
     this.fullName,
     this.phoneNumber,
@@ -430,6 +436,7 @@ class ModelAddCustomer {
     this.inseam,
     this.calf,
   });
+
   Map<String, dynamic> toMap() {
     return {
       keyFullName: fullName,

@@ -6,7 +6,7 @@ import 'package:tailor/account_creations/login_provider.dart';
 import 'package:tailor/customer_detail_page.dart';
 import 'package:tailor/model_add_customer.dart';
 
-import 'add_item.dart';
+import 'add_customer.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -16,6 +16,7 @@ class DashBoard extends StatefulWidget {
   static bool check = true;
   static bool isSearching = false;
   static List dataList = [];
+
   @override
   State<DashBoard> createState() => _DashBoardState();
 }
@@ -28,6 +29,7 @@ class _DashBoardState extends State<DashBoard> {
   late User? user;
   late Stream<QuerySnapshot> userStream;
   late TextEditingController _searchController;
+
   @override
   void initState() {
     super.initState();
@@ -213,7 +215,7 @@ class _DashBoardState extends State<DashBoard> {
                   });
                 },
                 icon: DashBoard.isSearching
-                    ? const Icon(Icons.cancel_outlined, size: 25)
+                    ? const Icon(Icons.cancel_rounded, size: 25)
                     : const Icon(Icons.search),
               )),
           DashBoard.selectedMode
@@ -232,18 +234,24 @@ class _DashBoardState extends State<DashBoard> {
         ],
         title: DashBoard.isSearching
             ? searchTextField()
-            : appBarTitle('Tailor App'),
+            : appBarTitle('Tailor Book'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: userStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
-            return const Text('Something went wrong');
+            return const Text(
+              'Something went wrong',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            );
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.data!.size == 0) {
             return const Center(
-              child: Text('No Customer Added Yet'),
+              child: Text(
+                'No Customer Added Yet',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             );
           }
           return ListView.builder(
@@ -258,8 +266,17 @@ class _DashBoardState extends State<DashBoard> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: ListTile(
-                  title: Text(data[ModelAddCustomer.keyFullName] ?? ''),
-                  subtitle: Text(data[ModelAddCustomer.keyPhoneNumber] ?? ''),
+                  title: Text(
+                    data[ModelAddCustomer.keyFullName] ?? '',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        fontFamily: 'RobotoMono'),
+                  ),
+                  subtitle: Text(
+                    data[ModelAddCustomer.keyPhoneNumber] ?? '',
+                    style: const TextStyle(color: Colors.black),
+                  ),
                   leading: DashBoard.selectedMode
                       ? InkWell(
                           child: DashBoard.selectedFlags[index]!
@@ -432,9 +449,11 @@ class _DashBoardState extends State<DashBoard> {
       child: TextFormField(
         cursorColor: Colors.black,
         controller: _searchController,
+        textInputAction: TextInputAction.search,
         keyboardType: TextInputType.emailAddress,
+        autofocus: true,
         decoration: InputDecoration(
-          hintStyle: const TextStyle(fontSize: 14),
+          hintStyle: const TextStyle(fontSize: 16),
           hintText: 'name/number/mail',
           suffixIcon: _searchController.text.isNotEmpty
               ? IconButton(
@@ -442,15 +461,15 @@ class _DashBoardState extends State<DashBoard> {
                     _searchController.clear();
                   },
                   icon: const Icon(
-                    Icons.cancel_outlined,
-                    color: Colors.red,
+                    Icons.cancel,
+                    color: Colors.black,
                     size: 20,
                   ),
                 )
               : null,
           border: InputBorder.none,
           contentPadding:
-              const EdgeInsets.only(top: 0, left: 10, right: 0.0, bottom: 15),
+              const EdgeInsets.only(top: 3, left: 15, right: 0.0, bottom: 15),
         ),
       ),
     );
