@@ -7,9 +7,9 @@ import 'package:tailor/utils/widgets.dart';
 
 class AddItem extends StatefulWidget {
   Map<String, dynamic>? map = {};
-  bool? editing = false;
+  bool? editing;
 
-  AddItem({Key? key, this.map, this.editing}) : super(key: key);
+  AddItem({Key? key, this.map, this.editing = false}) : super(key: key);
 
   @override
   State<AddItem> createState() => _AddItemState();
@@ -18,16 +18,17 @@ class AddItem extends StatefulWidget {
 class _AddItemState extends State<AddItem> {
   String updateTitle = 'Update Customer';
   String addTitle = 'Add Customer';
+
   // final String title = widget.editing! ? 'Update Customer': 'Add Customer';
   final GlobalKey<FormState> _formKeyCustomer = GlobalKey<FormState>();
   final GlobalKey<FormState> _formKeyMeasurement = GlobalKey<FormState>();
 
-  ///adding customer info/////
+  ///adding customer info///
   late final TextEditingController _nameController;
   late final TextEditingController _phoneController;
   late final TextEditingController _addressController;
 
-  ///adding customer's Measurements /////
+  ///adding customer's Measurements ///
   late final TextEditingController _collarController;
   late final TextEditingController _shoulderController;
   late final TextEditingController _chestController;
@@ -39,56 +40,49 @@ class _AddItemState extends State<AddItem> {
   late final TextEditingController _thighController;
   late final TextEditingController _inseamController;
   late final TextEditingController _calfController;
-  ModelAddCustomer modelAddCustomer = ModelAddCustomer();
-
   @override
   void initState() {
-    /// customer /////
+    /// customer ///
     _nameController = TextEditingController(
-        text:
-            widget.editing! ? widget.map![ModelAddCustomer.keyFullName] : null);
-    print(widget.editing!
-        ? widget.map![ModelAddCustomer.keyFullName]
-        : 'other null');
+        text: widget.editing! ? widget.map![ModelAddCustomer.keyFullName] : '');
+
     _phoneController = TextEditingController(
         text: widget.editing!
             ? widget.map![ModelAddCustomer.keyPhoneNumber]
-            : null);
+            : '');
     _addressController = TextEditingController(
-        text:
-            widget.editing! ? widget.map![ModelAddCustomer.keyAddress] : null);
+        text: widget.editing! ? widget.map![ModelAddCustomer.keyAddress] : '');
 
-    ///customer's Measurements /////
+    ///customer's Measurements ///
     _collarController = TextEditingController(
-        text: widget.editing! ? widget.map![ModelAddCustomer.keyCollar] : null);
+        text: widget.editing! ? widget.map![ModelAddCustomer.keyCollar] : '');
     _shoulderController = TextEditingController(
-        text:
-            widget.editing! ? widget.map![ModelAddCustomer.keyShoulder] : null);
+        text: widget.editing! ? widget.map![ModelAddCustomer.keyShoulder] : '');
     _chestController = TextEditingController(
-        text: widget.editing! ? widget.map![ModelAddCustomer.keyChest] : null);
+        text: widget.editing! ? widget.map![ModelAddCustomer.keyChest] : '');
     _waistController = TextEditingController(
-        text: widget.editing! ? widget.map![ModelAddCustomer.keyWaist] : null);
+        text: widget.editing! ? widget.map![ModelAddCustomer.keyWaist] : '');
     _armLengthController = TextEditingController(
-        text: widget.editing!
-            ? widget.map![ModelAddCustomer.keyArmLength]
-            : null);
+        text:
+            widget.editing! ? widget.map![ModelAddCustomer.keyArmLength] : '');
     _bicepsController = TextEditingController(
-        text: widget.editing! ? widget.map![ModelAddCustomer.keyBiceps] : null);
+        text: widget.editing! ? widget.map![ModelAddCustomer.keyBiceps] : '');
     _wristController = TextEditingController(
-        text: widget.editing! ? widget.map![ModelAddCustomer.keyWrist] : null);
+        text: widget.editing! ? widget.map![ModelAddCustomer.keyWrist] : '');
     _lengthController = TextEditingController(
-        text: widget.editing! ? widget.map![ModelAddCustomer.keyLength] : null);
+        text: widget.editing! ? widget.map![ModelAddCustomer.keyLength] : '');
     _thighController = TextEditingController(
-        text: widget.editing! ? widget.map![ModelAddCustomer.keyThigh] : null);
+        text: widget.editing! ? widget.map![ModelAddCustomer.keyThigh] : '');
     _inseamController = TextEditingController(
-        text: widget.editing! ? widget.map![ModelAddCustomer.keyInseam] : null);
+        text: widget.editing! ? widget.map![ModelAddCustomer.keyInseam] : '');
     _calfController = TextEditingController(
-        text: widget.editing! ? widget.map![ModelAddCustomer.keyCalf] : null);
+        text: widget.editing! ? widget.map![ModelAddCustomer.keyCalf] : '');
 
-    _nameController.addListener(() {
-      setState(() {});
-    });
+    _nameController.addListener(() => setState(() {}));
     super.initState();
+    print('////////empty=${_nameController.text.isEmpty}///////////////////');
+    print('//////empty=${_addressController.text.isEmpty}///////////////////');
+    print('/////empty=${_phoneController.text.isEmpty}///////////////////');
   }
 
   @override
@@ -120,7 +114,7 @@ class _AddItemState extends State<AddItem> {
     final customerCollection =
         FirebaseFirestore.instance.collection(currentUser!.uid);
     Future<void> addCustomer() async {
-      ModelAddCustomer(
+      var obj = ModelAddCustomer(
           fullName: _nameController.text,
           phoneNumber: _phoneController.text,
           address: _addressController.text,
@@ -135,26 +129,9 @@ class _AddItemState extends State<AddItem> {
           thigh: _thighController.text,
           waist: _waistController.text,
           wrist: _wristController.text);
-      // Map<String, dynamic> customerMap = {
-      //   'fullName': _nameController.text,
-      //   'phoneNumber': _phoneController.text,
-      //   'address': _addressController.text,
-      //   'collar': _collarController.text,
-      //   'shoulder': _shoulderController.text,
-      //   'chest': _chestController.text,
-      //   'waist': _waistController.text,
-      //   'armLength': _armLengthController.text,
-      //   'biceps': _bicepsController.text,
-      //   'wrist': _wristController.text,
-      //   'length': _lengthController.text,
-      //   'thigh': _thighController.text,
-      //   'inseam': _inseamController.text,
-      //   'calf': _calfController.text,
-      // };
-
       return await customerCollection
           .doc(_phoneController.text.toString())
-          .set(modelAddCustomer.toMap());
+          .set(obj.toMap());
     }
 
     // double width = MediaQuery.of(context).size.width;
@@ -222,7 +199,7 @@ class _AddItemState extends State<AddItem> {
         padding:
             const EdgeInsets.only(top: 8.0, left: 20, right: 20, bottom: 15),
         child: SingleChildScrollView(
-          reverse: true,
+          //  reverse: true,
           child: Column(
             children: [
               Form(
