@@ -351,7 +351,7 @@ class _AddItemState extends State<AddItem> {
                                 .customValidatorForMeasurementTile(value);
                           }),
                       const SizedBox(
-                        height: 10,
+                        height: 9.9,
                       ),
                       CommonWidgets.customMeasurementTile(
                           stringAssetImage: 'assets/images/inseam.jpg',
