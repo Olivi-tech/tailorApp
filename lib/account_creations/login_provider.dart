@@ -88,17 +88,6 @@ class LoginProvider {
     return 'Something has went wrong';
   }
 
-  // static customSnackBarForPhone({BuildContext? context, String? status}) {
-  //   return ScaffoldMessenger.of(context!).showSnackBar(SnackBar(
-  //     content: Text(status!),
-  //     backgroundColor: status ==
-  //                 "Phone number automatically verified and user signed in: ${auth.currentUser?.uid}" ||
-  //             status == 'Please check your phone for the verification code.'
-  //         ? Colors.green
-  //         : Colors.red,
-  //   ));
-  // }
-
   static Future<String> signInWithFacebook(
       {required BuildContext context}) async {
 // Trigger the sign-in flow
@@ -127,17 +116,52 @@ class LoginProvider {
   }
 
   static Future<String> logout({required BuildContext context}) async {
-    try {
-      await GoogleSignIn().disconnect().whenComplete(() async {
-        await FirebaseAuth.instance.signOut();
-      });
-      await FacebookAuth.instance.logOut().whenComplete(() async {
-        FirebaseAuth.instance.signOut();
-      });
-      return 'Logged out Successfully';
-    } catch (e) {
-      return 'Could not Logged out';
+    var providerID =
+        FirebaseAuth.instance.currentUser?.providerData.first.providerId;
+    print('////////////////providerID = $providerID/////////////////');
+    switch (providerID) {
+      case 'google.com':
+        print(' ///////////////case google.com//////////////////////');
+        try {
+          await GoogleSignIn().disconnect().whenComplete(() async {
+            await FirebaseAuth.instance.signOut();
+          });
+          return 'Logged out Successfully';
+        } catch (e) {
+          return 'Could not Logged out';
+        }
+        break;
+      case 'facebook.com':
+        print('///////////////// case facebook.com//////////////////');
+        try {
+          await FacebookAuth.instance.logOut().whenComplete(() async {
+            FirebaseAuth.instance.signOut();
+          });
+          return 'Logged out Successfully';
+        } catch (e) {
+          return 'Could not Logged out';
+        }
+        break;
+      case 'phone':
+        print('///////////////// case phone//////////////////');
+        try {
+          await FirebaseAuth.instance.signOut();
+          return 'Logged out Successfully';
+        } catch (e) {
+          return 'Could not Logged out';
+        }
+        break;
+      case 'password':
+        print('/////////////////case password//////////////////');
+        try {
+          await FirebaseAuth.instance.signOut();
+          return 'Logged out Successfully';
+        } catch (e) {
+          return 'Could not Logged out';
+        }
+        break;
     }
+    return 'SomeThing Went Wrong';
   }
 
   static Future<String> signInWithGoogle() async {
