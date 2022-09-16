@@ -146,12 +146,7 @@ class SignUp extends StatelessWidget {
                           }),
                     ),
                   )
-                  // Text(
-                  //   'Sign Up With Social Accounts',
-                  //   style: textStyle,
-                  //   textScaleFactor: 1.5,
-                  // )
-                ],
+                              ],
               ),
             ],
           ),
