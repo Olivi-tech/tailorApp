@@ -2,7 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tailor/model_add_customer.dart';
+import 'package:tailor/screens/model_add_customer.dart';
 import 'package:tailor/utils/widgets.dart';
 
 class AddItem extends StatefulWidget {
@@ -351,7 +351,7 @@ class _AddItemState extends State<AddItem> {
                                 .customValidatorForMeasurementTile(value);
                           }),
                       const SizedBox(
-                        height: 9.9,
+                        height: 10,
                       ),
                       CommonWidgets.customMeasurementTile(
                           stringAssetImage: 'assets/images/inseam.jpg',

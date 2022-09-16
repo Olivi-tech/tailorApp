@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tailor/account_creations/login_provider.dart';
-import 'package:tailor/customer_detail_page.dart';
-import 'package:tailor/model_add_customer.dart';
+import 'package:tailor/screens/customer_detail_page.dart';
+import 'package:tailor/screens/model_add_customer.dart';
 
 import 'add_customer.dart';
 

@@ -1,7 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:tailor/data_check.dart';
+import 'package:tailor/screens/data_check.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,4 +26,5 @@ Future<void> main() async {
         primarySwatch: Colors.green,
       )));
 }
+
 /// just checking via github///

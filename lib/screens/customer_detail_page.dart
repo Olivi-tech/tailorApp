@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tailor/add_customer.dart';
+import 'package:tailor/screens/add_customer.dart';
 
 import 'model_add_customer.dart';
 

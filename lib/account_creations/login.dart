@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tailor/account_creations/login_provider.dart';
 import 'package:tailor/account_creations/sign_up.dart';
-import 'package:tailor/dashboard.dart';
-import 'package:tailor/phone_verification.dart';
+import 'package:tailor/screens/dashboard.dart';
+import 'package:tailor/screens/phone_verification.dart';
 import 'package:tailor/utils/widgets.dart';
 
 class Login extends StatefulWidget {
