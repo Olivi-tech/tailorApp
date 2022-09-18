@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CommonWidgets {
   // static late String hintText;
@@ -29,16 +30,20 @@ class CommonWidgets {
       {required String? hintText,
       String? Function(String?)? validator,
       Icon? prefixIcon,
+      List<TextInputFormatter>? inputFormatters,
       String? initialValue,
       TextEditingController? controller,
       Icon? suffixIcon,
+      int? maxLength,
       TextInputType? keyboardType,
       bool obscureText = false}) {
     return TextFormField(
       keyboardType: keyboardType,
       initialValue: initialValue,
+      inputFormatters: inputFormatters,
       validator: validator,
       controller: controller,
+      maxLength: maxLength,
       obscureText: obscureText,
       decoration: InputDecoration(
         constraints: const BoxConstraints(maxHeight: 60),
@@ -55,8 +60,8 @@ class CommonWidgets {
   static String? customValidator(String? value) {
     if (value!.isEmpty || value.length < 6) {
       return 'value must be greater or equal to 6';
-    } else if (value.length > 16 && value.length > 6) {
-      return 'Value Can\'t be greater than 16 characters';
+    } else if (value.length > 30 && value.length > 6) {
+      return 'Value Can\'t be greater than 30 characters';
     }
     return null;
   }

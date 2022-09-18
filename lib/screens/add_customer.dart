@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tailor/screens/model_add_customer.dart';
 import 'package:tailor/utils/widgets.dart';
 
@@ -219,6 +220,11 @@ class _AddItemState extends State<AddItem> {
                     CommonWidgets.customTextFormField(
                         hintText: 'Full Name',
                         controller: _nameController,
+                        maxLength: 18,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                              RegExp('[a-zA-Z0-9]'))
+                        ],
                         prefixIcon: const Icon(Icons.person_add_alt_outlined),
                         validator: (value) {
                           return CommonWidgets.customValidator('$value');
@@ -228,6 +234,10 @@ class _AddItemState extends State<AddItem> {
                         controller: _phoneController,
                         keyboardType: TextInputType.phone,
                         hintText: 'Phone Number',
+                        maxLength: 13,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         prefixIcon: const Icon(Icons.phone_enabled_outlined),
                         validator: (value) {
                           return CommonWidgets.customValidator('$value');
@@ -236,6 +246,7 @@ class _AddItemState extends State<AddItem> {
                     CommonWidgets.customTextFormField(
                         keyboardType: TextInputType.streetAddress,
                         hintText: 'Address',
+                        maxLength: 30,
                         controller: _addressController,
                         prefixIcon: const Icon(Icons.maps_home_work_outlined),
                         validator: (value) {
