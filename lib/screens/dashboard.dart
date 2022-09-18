@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tailor/account_creations/login_provider.dart';
+import 'package:tailor/screens/add_item_practice.dart';
 import 'package:tailor/screens/customer_detail_page.dart';
 import 'package:tailor/screens/model_add_customer.dart';
 
@@ -522,7 +523,11 @@ class _DashBoardState extends State<DashBoard> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddItem()));
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      //    AddItem()
+                      const AddItemPractice()));
         },
         child: const Icon(Icons.add),
       ),
