@@ -23,9 +23,9 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   final String imgUrl = 'assets/images/avatar_image.jpg';
-
   var customerList = [];
   bool check = true;
+  static String searchedText = '';
   late User? user;
   late Stream<QuerySnapshot> userStream;
   late TextEditingController _searchController;
@@ -212,6 +212,7 @@ class _DashBoardState extends State<DashBoard> {
                 onPressed: () {
                   setState(() {
                     DashBoard.isSearching = !DashBoard.isSearching;
+                    searchedText = '';
                   });
                 },
                 icon: DashBoard.isSearching
@@ -245,7 +246,10 @@ class _DashBoardState extends State<DashBoard> {
               style: TextStyle(fontWeight: FontWeight.bold),
             );
           } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child: CircularProgressIndicator(
+              color: Colors.blue,
+            ));
           } else if (snapshot.data!.size == 0) {
             return const Center(
               child: Text(
@@ -262,125 +266,255 @@ class _DashBoardState extends State<DashBoard> {
               DashBoard.selectedFlags[index] =
                   DashBoard.selectedFlags[index] ?? false;
               DashBoard.selected = DashBoard.selectedFlags[index];
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                child: ListTile(
-                  title: Text(
-                    data[ModelAddCustomer.keyFullName] ?? '',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        fontFamily: 'RobotoMono'),
-                  ),
-                  subtitle: Text(
-                    data[ModelAddCustomer.keyPhoneNumber] ?? '',
-                    style: const TextStyle(color: Colors.black),
-                  ),
-                  leading: DashBoard.selectedMode
-                      ? InkWell(
-                          child: DashBoard.selectedFlags[index]!
-                              ? const Icon(
-                                  Icons.check_box,
-                                  color: Colors.green,
-                                )
-                              : const Icon(Icons.check_box_outline_blank))
-                      : null,
-                  trailing: CircleAvatar(
-                    child: Text('${DashBoard.selectedFlags[index]}'),
-                  ),
-                  selected: DashBoard.selectedFlags[index]!,
-                  selectedTileColor: Colors.grey.shade300,
-                  selectedColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                        color:
-                            DashBoard.selectedMode ? Colors.red : Colors.white),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  tileColor: Colors.white,
-                  onLongPress: () {
-                    DashBoard.selectedMode = true;
-                    if (DashBoard.selectedMode) {
-                      setState(() {
-                        DashBoard.selectedFlags[index] =
-                            !DashBoard.selectedFlags[index]!;
-                        customerList.add(data);
-                      });
-                    }
-                  },
-                  onTap: () {
-                    if (DashBoard.selectedMode) {
-                      setState(() {
-                        DashBoard.selectedFlags[index] =
-                            !DashBoard.selectedFlags[index]!;
-                        if (DashBoard.selectedFlags[index]!) {
-                          customerList.add(data);
-                        } else {
-                          customerList.removeWhere((element) =>
-                              element['phoneNumber']
-                                  .toString()
-                                  .contains(data['phoneNumber']));
+              if (searchedText.isEmpty) {
+                return Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    child: ListTile(
+                      title: Text(
+                        data[ModelAddCustomer.keyFullName] ?? '',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            fontFamily: 'RobotoMono'),
+                      ),
+                      subtitle: Text(
+                        data[ModelAddCustomer.keyPhoneNumber] ?? '',
+                        style: const TextStyle(color: Colors.black),
+                      ),
+                      leading: DashBoard.selectedMode
+                          ? InkWell(
+                              child: DashBoard.selectedFlags[index]!
+                                  ? const Icon(
+                                      Icons.check_box,
+                                      color: Colors.green,
+                                    )
+                                  : const Icon(Icons.check_box_outline_blank))
+                          : null,
+                      trailing: CircleAvatar(
+                        child: Text('${DashBoard.selectedFlags[index]}'),
+                      ),
+                      selected: DashBoard.selectedFlags[index]!,
+                      selectedTileColor: Colors.grey.shade300,
+                      selectedColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            color: DashBoard.selectedMode
+                                ? Colors.red
+                                : Colors.white),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      tileColor: Colors.white,
+                      onLongPress: () {
+                        DashBoard.selectedMode = true;
+                        if (DashBoard.selectedMode) {
+                          setState(() {
+                            DashBoard.selectedFlags[index] =
+                                !DashBoard.selectedFlags[index]!;
+                            customerList.add(data);
+                          });
                         }
-                      });
-                    } else {
-                      print(
-                          '//////////////////////////////// CustomerDetailPage////////////////////////');
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  CustomerDetailPage(map: data)
-                              //     CustomerDetailPage(
-                              //   fullName: data['fullName'],
-                              //   phoneNumber: data['phoneNumber'],
-                              //   address: data['address'],
-                              //   wrist: data['wrist'],
-                              //   armLength: data['armLength'],
-                              //   biceps: data['biceps'],
-                              //   calf: data['calf'],
-                              //   collar: data['collar'],
-                              //   chest: data['chest'],
-                              //   inseam: data['inseam'],
-                              //   length: data['length'],
-                              //   thigh: data['thigh'],
-                              //   waist: data['waist'],
-                              //   shoulder: data['shoulder'],
-                              //   title: 'Customer Info',
-                              // ),
-                              ));
-                      print(
-                          '////////////////fullName////////// ${data['fullName']}/////////////////////////');
-                      print(
-                          '/////////////////phoneNumber///////// ${data['phoneNumber']}/////////////////////////');
-                      print(
-                          '/////////////////address///////// ${data['address']}/////////////////////////');
-                      print(
-                          '////////////////wrist////////// ${data['wrist']}/////////////////////////');
-                      print(
-                          '/////////////armLength///////////// ${data['armLength']}/////////////////////////');
-                      print(
-                          '////////////////biceps////////// ${data['biceps']}/////////////////////////');
-                      print(
-                          '/////////////calf///////////// ${data['calf']}/////////////////////////');
-                      print(
-                          '////////////collar////////////// ${data['collar']}/////////////////////////');
-                      print(
-                          '/////////////chest///////////// ${data['chest']}/////////////////////////');
-                      print(
-                          '///////////////inseam/////////// ${data['inseam']}/////////////////////////');
-                      print(
-                          '/////////////length///////////// ${data['length']}/////////////////////////');
-                      print(
-                          '/////////////thigh///////////// ${data['thigh']}/////////////////////////');
-                      print(
-                          '//////////////waist//////////// ${data['waist']}/////////////////////////');
-                      print(
-                          '/////////////shoulder///////////// ${data['shoulder']}/////////////////////////');
-                    }
-                  },
-                ),
-              );
+                      },
+                      onTap: () {
+                        if (DashBoard.selectedMode) {
+                          setState(() {
+                            DashBoard.selectedFlags[index] =
+                                !DashBoard.selectedFlags[index]!;
+                            if (DashBoard.selectedFlags[index]!) {
+                              customerList.add(data);
+                            } else {
+                              customerList.removeWhere((element) =>
+                                  element['phoneNumber']
+                                      .toString()
+                                      .contains(data['phoneNumber']));
+                            }
+                          });
+                        } else {
+                          print(
+                              '//////////////////////////////// CustomerDetailPage////////////////////////');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      CustomerDetailPage(map: data)
+                                  //     CustomerDetailPage(
+                                  //   fullName: data['fullName'],
+                                  //   phoneNumber: data['phoneNumber'],
+                                  //   address: data['address'],
+                                  //   wrist: data['wrist'],
+                                  //   armLength: data['armLength'],
+                                  //   biceps: data['biceps'],
+                                  //   calf: data['calf'],
+                                  //   collar: data['collar'],
+                                  //   chest: data['chest'],
+                                  //   inseam: data['inseam'],
+                                  //   length: data['length'],
+                                  //   thigh: data['thigh'],
+                                  //   waist: data['waist'],
+                                  //   shoulder: data['shoulder'],
+                                  //   title: 'Customer Info',
+                                  // ),
+                                  ));
+                          print(
+                              '////////////////fullName////////// ${data['fullName']}/////////////////////////');
+                          print(
+                              '/////////////////phoneNumber///////// ${data['phoneNumber']}/////////////////////////');
+                          print(
+                              '/////////////////address///////// ${data['address']}/////////////////////////');
+                          print(
+                              '////////////////wrist////////// ${data['wrist']}/////////////////////////');
+                          print(
+                              '/////////////armLength///////////// ${data['armLength']}/////////////////////////');
+                          print(
+                              '////////////////biceps////////// ${data['biceps']}/////////////////////////');
+                          print(
+                              '/////////////calf///////////// ${data['calf']}/////////////////////////');
+                          print(
+                              '////////////collar////////////// ${data['collar']}/////////////////////////');
+                          print(
+                              '/////////////chest///////////// ${data['chest']}/////////////////////////');
+                          print(
+                              '///////////////inseam/////////// ${data['inseam']}/////////////////////////');
+                          print(
+                              '/////////////length///////////// ${data['length']}/////////////////////////');
+                          print(
+                              '/////////////thigh///////////// ${data['thigh']}/////////////////////////');
+                          print(
+                              '//////////////waist//////////// ${data['waist']}/////////////////////////');
+                          print(
+                              '/////////////shoulder///////////// ${data['shoulder']}/////////////////////////');
+                        }
+                      },
+                    ));
+              } else if (data['fullName']
+                      .toString()
+                      .toLowerCase()
+                      .startsWith(searchedText.toLowerCase()) ||
+                  data['phoneNumber']
+                      .toString()
+                      .toLowerCase()
+                      .startsWith(searchedText.toLowerCase())) {
+                return Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    child: ListTile(
+                      title: Text(
+                        data[ModelAddCustomer.keyFullName] ?? '',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            fontFamily: 'RobotoMono'),
+                      ),
+                      subtitle: Text(
+                        data[ModelAddCustomer.keyPhoneNumber] ?? '',
+                        style: const TextStyle(color: Colors.black),
+                      ),
+                      leading: DashBoard.selectedMode
+                          ? InkWell(
+                              child: DashBoard.selectedFlags[index]!
+                                  ? const Icon(
+                                      Icons.check_box,
+                                      color: Colors.green,
+                                    )
+                                  : const Icon(Icons.check_box_outline_blank))
+                          : null,
+                      trailing: CircleAvatar(
+                        child: Text('${DashBoard.selectedFlags[index]}'),
+                      ),
+                      selected: DashBoard.selectedFlags[index]!,
+                      selectedTileColor: Colors.grey.shade300,
+                      selectedColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            color: DashBoard.selectedMode
+                                ? Colors.red
+                                : Colors.white),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      tileColor: Colors.white,
+                      onLongPress: () {
+                        DashBoard.selectedMode = true;
+                        if (DashBoard.selectedMode) {
+                          setState(() {
+                            DashBoard.selectedFlags[index] =
+                                !DashBoard.selectedFlags[index]!;
+                            customerList.add(data);
+                          });
+                        }
+                      },
+                      onTap: () {
+                        if (DashBoard.selectedMode) {
+                          setState(() {
+                            DashBoard.selectedFlags[index] =
+                                !DashBoard.selectedFlags[index]!;
+                            if (DashBoard.selectedFlags[index]!) {
+                              customerList.add(data);
+                            } else {
+                              customerList.removeWhere((element) =>
+                                  element['phoneNumber']
+                                      .toString()
+                                      .contains(data['phoneNumber']));
+                            }
+                          });
+                        } else {
+                          print(
+                              '//////////////////////////////// CustomerDetailPage////////////////////////');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      CustomerDetailPage(map: data)
+                                  //     CustomerDetailPage(
+                                  //   fullName: data['fullName'],
+                                  //   phoneNumber: data['phoneNumber'],
+                                  //   address: data['address'],
+                                  //   wrist: data['wrist'],
+                                  //   armLength: data['armLength'],
+                                  //   biceps: data['biceps'],
+                                  //   calf: data['calf'],
+                                  //   collar: data['collar'],
+                                  //   chest: data['chest'],
+                                  //   inseam: data['inseam'],
+                                  //   length: data['length'],
+                                  //   thigh: data['thigh'],
+                                  //   waist: data['waist'],
+                                  //   shoulder: data['shoulder'],
+                                  //   title: 'Customer Info',
+                                  // ),
+                                  ));
+                          print(
+                              '////////////////fullName////////// ${data['fullName']}/////////////////////////');
+                          print(
+                              '/////////////////phoneNumber///////// ${data['phoneNumber']}/////////////////////////');
+                          print(
+                              '/////////////////address///////// ${data['address']}/////////////////////////');
+                          print(
+                              '////////////////wrist////////// ${data['wrist']}/////////////////////////');
+                          print(
+                              '/////////////armLength///////////// ${data['armLength']}/////////////////////////');
+                          print(
+                              '////////////////biceps////////// ${data['biceps']}/////////////////////////');
+                          print(
+                              '/////////////calf///////////// ${data['calf']}/////////////////////////');
+                          print(
+                              '////////////collar////////////// ${data['collar']}/////////////////////////');
+                          print(
+                              '/////////////chest///////////// ${data['chest']}/////////////////////////');
+                          print(
+                              '///////////////inseam/////////// ${data['inseam']}/////////////////////////');
+                          print(
+                              '/////////////length///////////// ${data['length']}/////////////////////////');
+                          print(
+                              '/////////////thigh///////////// ${data['thigh']}/////////////////////////');
+                          print(
+                              '//////////////waist//////////// ${data['waist']}/////////////////////////');
+                          print(
+                              '/////////////shoulder///////////// ${data['shoulder']}/////////////////////////');
+                        }
+                      },
+                    ));
+              }
+              return Container();
             },
           );
         },
@@ -447,6 +581,9 @@ class _DashBoardState extends State<DashBoard> {
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(32)),
       child: TextFormField(
+        onChanged: (value) => setState(() {
+          searchedText = value;
+        }),
         cursorColor: Colors.black,
         controller: _searchController,
         textInputAction: TextInputAction.search,
@@ -454,11 +591,12 @@ class _DashBoardState extends State<DashBoard> {
         autofocus: true,
         decoration: InputDecoration(
           hintStyle: const TextStyle(fontSize: 16),
-          hintText: 'name/number/mail',
+          hintText: 'first name or phone',
           suffixIcon: _searchController.text.isNotEmpty
               ? IconButton(
                   onPressed: () {
                     _searchController.clear();
+                    searchedText = '';
                   },
                   icon: const Icon(
                     Icons.cancel,
