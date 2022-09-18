@@ -221,6 +221,7 @@ class _AddItemState extends State<AddItem> {
                         hintText: 'Full Name',
                         controller: _nameController,
                         maxLength: 18,
+                      ///checking via github
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
                               RegExp('[a-zA-Z0-9]'))
