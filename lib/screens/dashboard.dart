@@ -7,8 +7,6 @@ import 'package:tailor/screens/add_item_practice.dart';
 import 'package:tailor/screens/customer_detail_page.dart';
 import 'package:tailor/screens/model_add_customer.dart';
 
-import 'add_customer.dart';
-
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);
   static bool? selected;
@@ -390,11 +388,11 @@ class _DashBoardState extends State<DashBoard> {
               } else if (data['fullName']
                       .toString()
                       .toLowerCase()
-                      .startsWith(searchedText.toLowerCase()) ||
+                      .contains(searchedText.toLowerCase()) ||
                   data['phoneNumber']
                       .toString()
                       .toLowerCase()
-                      .startsWith(searchedText.toLowerCase())) {
+                      .contains(searchedText.toLowerCase())) {
                 return Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
