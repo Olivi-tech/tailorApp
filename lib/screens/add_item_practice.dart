@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../utils/widgets.dart';
 
 class AddItemPractice extends StatelessWidget {
   const AddItemPractice({Key? key}) : super(key: key);
@@ -6,7 +9,7 @@ class AddItemPractice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.white70.withAlpha(250),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -20,12 +23,34 @@ class AddItemPractice extends StatelessWidget {
       ),
       body: SafeArea(
         child: Center(
-          child: Column(children: const [
-            Text(
-              'Add Your Customer Info',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-          ]),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
+            child: Column(children: [
+              const Text(
+                'Add Your Customer Info',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              Card(
+                elevation: 1,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
+                color: Colors.white,
+                child: TextFormField(
+                    cursorColor: Colors.black,
+                    decoration: const InputDecoration(
+                      constraints: BoxConstraints(maxHeight: 50, minHeight: 50),
+                      hintStyle: TextStyle(fontSize: 18, color: Colors.black),
+                      hintText: 'First Name',
+                      prefixIcon: Icon(Icons.person_add_alt_1),
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.only(left: 20, top: 15),
+                    ),
+                    validator: (value) {
+                      return CommonWidgets.customValidator('$value');
+                    }),
+              ),
+            ]),
+          ),
         ),
       ),
     );

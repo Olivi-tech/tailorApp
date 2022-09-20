@@ -6,8 +6,10 @@ import 'package:tailor/utils/widgets.dart';
 class SignUp extends StatelessWidget {
   SignUp({Key? key}) : super(key: key);
   final String _title = 'Sign Up';
-  static const TextStyle textStyle =
-      TextStyle(fontWeight: FontWeight.bold, color: Colors.green);
+  static TextStyle textStyle = const TextStyle(
+      fontWeight: FontWeight.bold,
+      color: Colors.green,
+      backgroundColor: Colors.black);
 
   final TextEditingController _userEmailController = TextEditingController();
   final TextEditingController _userPWDController = TextEditingController();
@@ -64,7 +66,7 @@ class SignUp extends StatelessWidget {
                           hintText: 'User Email',
                           prefixIcon: const Icon(Icons.person_add_alt),
                           controller: _userEmailController,
-                          keyboardType: TextInputType.emailAddress,
+                          textInputType: TextInputType.emailAddress,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Email Can\'t Be Empty';
@@ -146,7 +148,7 @@ class SignUp extends StatelessWidget {
                           }),
                     ),
                   )
-                              ],
+                ],
               ),
             ],
           ),

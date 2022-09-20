@@ -221,9 +221,10 @@ class _AddItemState extends State<AddItem> {
                         hintText: 'Full Name',
                         controller: _nameController,
                         maxLength: 18,
+                        textInputType: TextInputType.text,
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
-                              RegExp('[a-zA-Z0-9]'))
+                              RegExp('[a-zA-Z 0-9]'))
                         ],
                         prefixIcon: const Icon(Icons.person_add_alt_outlined),
                         validator: (value) {
@@ -232,7 +233,7 @@ class _AddItemState extends State<AddItem> {
                     const SizedBox(height: 10.0),
                     CommonWidgets.customTextFormField(
                         controller: _phoneController,
-                        keyboardType: TextInputType.phone,
+                        textInputType: TextInputType.phone,
                         hintText: 'Phone Number',
                         maxLength: 13,
                         inputFormatters: [
@@ -244,7 +245,7 @@ class _AddItemState extends State<AddItem> {
                         }),
                     const SizedBox(height: 10.0),
                     CommonWidgets.customTextFormField(
-                        keyboardType: TextInputType.streetAddress,
+                        textInputType: TextInputType.streetAddress,
                         hintText: 'Address',
                         maxLength: 30,
                         controller: _addressController,

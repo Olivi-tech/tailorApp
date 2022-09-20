@@ -521,11 +521,13 @@ class _DashBoardState extends State<DashBoard> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          print(MediaQuery.of(context).size.height);
           Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AddItem()
-                  // const AddItemPractice()
-                  ));
+              MaterialPageRoute(
+                  builder: (context) =>
+                      //AddItem()
+                      const AddItemPractice()));
         },
         child: const Icon(Icons.add),
       ),

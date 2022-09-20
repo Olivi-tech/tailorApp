@@ -35,25 +35,36 @@ class CommonWidgets {
       TextEditingController? controller,
       Icon? suffixIcon,
       int? maxLength,
-      TextInputType? keyboardType,
+      TextInputType? textInputType,
+      TextStyle? hintStyle,
       bool obscureText = false}) {
-    return TextFormField(
-      keyboardType: keyboardType,
-      initialValue: initialValue,
-      inputFormatters: inputFormatters,
-      validator: validator,
-      controller: controller,
-      maxLength: maxLength,
-      obscureText: obscureText,
-      decoration: InputDecoration(
-        constraints: const BoxConstraints(maxHeight: 60, minHeight: 50),
-        label: Text(hintText!),
-        contentPadding: EdgeInsets.zero,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-            borderSide: const BorderSide(color: Colors.black)),
+    return Card(
+      elevation: 1,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: TextFormField(
+        keyboardType: textInputType,
+        initialValue: initialValue,
+        inputFormatters: inputFormatters,
+        validator: validator,
+        controller: controller,
+        maxLength: maxLength,
+        obscureText: obscureText,
+        decoration: InputDecoration(
+          constraints: const BoxConstraints(maxHeight: 50, minHeight: 50),
+          // label: Text(hintText!),
+          contentPadding: const EdgeInsets.only(left: 20, top: 15),
+          prefixIcon: prefixIcon,
+          hintStyle: hintStyle,
+          suffixIcon: suffixIcon,
+          border: InputBorder.none,
+
+          // border: OutlineInputBorder(
+          //     borderRadius: BorderRadius.circular(20),
+          //     borderSide: const BorderSide(color: Colors.black)),
+        ),
       ),
     );
   }
