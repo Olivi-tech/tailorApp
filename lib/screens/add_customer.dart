@@ -248,7 +248,8 @@ class _AddItemState extends State<AddItem> {
                         hintText: 'Address',
                         maxLength: 30,
                         controller: _addressController,
-                        prefixIcon: const Icon(Icons.maps_home_work_outlined),
+                        prefixIcon:
+                            const Icon(Icons.maps_home_work_outlined, size: 20),
                         validator: (value) {
                           return CommonWidgets.customValidator('$value');
                         }),

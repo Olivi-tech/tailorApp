@@ -6,6 +6,7 @@ import 'package:tailor/account_creations/login_provider.dart';
 import 'package:tailor/screens/add_item_practice.dart';
 import 'package:tailor/screens/customer_detail_page.dart';
 import 'package:tailor/screens/model_add_customer.dart';
+import 'package:tailor/screens/add_customer.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -522,10 +523,9 @@ class _DashBoardState extends State<DashBoard> {
         onPressed: () {
           Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      //    AddItem()
-                      const AddItemPractice()));
+              MaterialPageRoute(builder: (context) => AddItem()
+                  // const AddItemPractice()
+                  ));
         },
         child: const Icon(Icons.add),
       ),

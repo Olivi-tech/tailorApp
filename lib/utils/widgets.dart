@@ -46,8 +46,9 @@ class CommonWidgets {
       maxLength: maxLength,
       obscureText: obscureText,
       decoration: InputDecoration(
-        constraints: const BoxConstraints(maxHeight: 60),
+        constraints: const BoxConstraints(maxHeight: 60, minHeight: 50),
         label: Text(hintText!),
+        contentPadding: EdgeInsets.zero,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         border: OutlineInputBorder(
