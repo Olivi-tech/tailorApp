@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tailor/screens/dashboard.dart';
 
 import '../account_creations/login.dart';
-
+///////////////////////////////////////////////////////////
 class DataCheck extends StatelessWidget {
   const DataCheck({Key? key}) : super(key: key);
   static final User? user = FirebaseAuth.instance.currentUser;
