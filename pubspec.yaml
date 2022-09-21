@@ -39,6 +39,7 @@ dependencies:
   cloud_firestore:
   awesome_dialog: ^2.2.1
   google_fonts:
+  fluttertoast: ^8.0.9
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2

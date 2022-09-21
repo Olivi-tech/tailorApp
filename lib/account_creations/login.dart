@@ -5,9 +5,10 @@ import 'package:tailor/account_creations/sign_up.dart';
 import 'package:tailor/screens/dashboard.dart';
 import 'package:tailor/screens/phone_verification.dart';
 import 'package:tailor/utils/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Login extends StatefulWidget {
-  Login({Key? key}) : super(key: key);
+  const Login({Key? key}) : super(key: key);
   static final _formKey = GlobalKey<FormState>();
   @override
   State<Login> createState() => _LoginState();
@@ -99,7 +100,23 @@ class _LoginState extends State<Login> {
               children: [
                 CommonWidgets.customBtn(
                     onPressed: () async {
-                      if (Login._formKey.currentState!.validate()) {
+                      if (!_emailController.text.contains('@') ||
+                          !_emailController.text.contains('.') ||
+                          _emailController.text.isEmpty ||
+                          _pwdController.text.isEmpty) {
+                        Fluttertoast.showToast(
+                          msg: !_emailController.text.contains('@') ||
+                                  !_emailController.text.contains('.') ||
+                                  _emailController.text.isEmpty
+                              ? 'Invalid or Empty Email'
+                              : 'Password can\'t be Empty',
+                          backgroundColor: Colors.black,
+                          fontSize: 16,
+                          textColor: Colors.white,
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER_RIGHT,
+                        );
+                      } else {
                         final status =
                             await LoginProvider.signInWithEmailAndPWD(
                                 email: _emailController.text,
@@ -115,6 +132,22 @@ class _LoginState extends State<Login> {
                           return;
                         }
                       }
+                      // if (Login._formKey.currentState!.validate()) {
+                      //   final status =
+                      //       await LoginProvider.signInWithEmailAndPWD(
+                      //           email: _emailController.text,
+                      //           password: _pwdController.text);
+                      //   LoginProvider.customSnackBar(
+                      //       status: status, context: context);
+                      //   if (status == 'Signed In Successfully') {
+                      //     Navigator.push(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //             builder: (context) => const DashBoard()));
+                      //   } else {
+                      //     return;
+                      //   }
+                      // }
                       // Navigator.push(
                       //     context,
                       //     MaterialPageRoute(
