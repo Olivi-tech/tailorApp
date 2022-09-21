@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tailor/account_creations/login.dart';
 import 'package:tailor/account_creations/login_provider.dart';
 import 'package:tailor/utils/widgets.dart';
 
@@ -7,9 +6,9 @@ class SignUp extends StatelessWidget {
   SignUp({Key? key}) : super(key: key);
   final String _title = 'Sign Up';
   static TextStyle textStyle = const TextStyle(
-      fontWeight: FontWeight.bold,
-      color: Colors.green,
-      backgroundColor: Colors.black);
+    fontWeight: FontWeight.bold,
+    color: Colors.green,
+  );
 
   final TextEditingController _userEmailController = TextEditingController();
   final TextEditingController _userPWDController = TextEditingController();
@@ -24,7 +23,7 @@ class SignUp extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         elevation: 0.0,
         shadowColor: Colors.white,
         leading: InkWell(
@@ -64,6 +63,7 @@ class SignUp extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 38.0),
                         child: CommonWidgets.customTextFormField(
                           hintText: 'User Email',
+                          hintStyle: const TextStyle(color: Colors.black),
                           prefixIcon: const Icon(Icons.person_add_alt),
                           controller: _userEmailController,
                           textInputType: TextInputType.emailAddress,
@@ -78,6 +78,7 @@ class SignUp extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 10.0),
                         child: CommonWidgets.customTextFormField(
                           hintText: 'Password',
+                          hintStyle: const TextStyle(color: Colors.black),
                           obscureText: true,
                           controller: _userPWDController,
                           prefixIcon: const Icon(Icons.password),
