@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tailor/account_creations/login_provider.dart';
+import 'package:tailor/screens/dashboard.dart';
 import 'package:tailor/utils/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({Key? key}) : super(key: key);
@@ -39,7 +41,7 @@ class SignUp extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
         child: SingleChildScrollView(
-          reverse: true,
+          //   reverse: true,
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
             // crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,7 +66,7 @@ class SignUp extends StatelessWidget {
                         child: CommonWidgets.customTextFormField(
                           hintText: 'User Email',
                           hintStyle: const TextStyle(color: Colors.black),
-                          prefixIcon: const Icon(Icons.person_add_alt),
+                          prefixIcon: const Icon(Icons.person_add_alt_1),
                           controller: _userEmailController,
                           textInputType: TextInputType.emailAddress,
                           validator: (value) {
@@ -108,7 +110,24 @@ class SignUp extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 10.0),
                       child: CommonWidgets.customBtn(
                           onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
+                            if (_userEmailController.text.isEmpty ||
+                                !_userEmailController.text.contains('@') ||
+                                !_userEmailController.text.contains('.')) {
+                              Fluttertoast.showToast(
+                                  msg: _userEmailController.text.isEmpty
+                                      ? 'Email Can\'t Be Empty'
+                                      : 'Invalid Email');
+                            } else if (_userPWDController.text.isEmpty) {
+                              Fluttertoast.showToast(
+                                  msg: 'Password can\'t be empty');
+                            } else if (_userPWDConfirmController.text.isEmpty ||
+                                _userPWDController.text !=
+                                    _userPWDConfirmController.text) {
+                              Fluttertoast.showToast(
+                                  msg: _userPWDConfirmController.text.isEmpty
+                                      ? 'Confirm Password Can\'t Be Empty'
+                                      : 'Password doesn\'t match');
+                            } else {
                               final status =
                                   await LoginProvider.signUpWithEmail(
                                 password: _userPWDController.text,
@@ -116,6 +135,9 @@ class SignUp extends StatelessWidget {
                               );
                               LoginProvider.customSnackBar(
                                   status: status, context: context);
+                              if (status == 'Account Created Successfully') {
+                                Navigator.pop(context);
+                              }
                             }
                           },
                           name: 'Sign Up',
