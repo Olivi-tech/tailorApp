@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 import '../utils/widgets.dart';
 
 class AddItemPractice extends StatelessWidget {
@@ -9,7 +7,7 @@ class AddItemPractice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white70.withAlpha(250),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -27,7 +25,7 @@ class AddItemPractice extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
             child: Column(children: [
               const Text(
-                'Add Your Customer Info',
+                'Add Customer Details',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               Card(

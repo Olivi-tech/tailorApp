@@ -57,14 +57,14 @@ class _LoginState extends State<Login> {
                 CommonWidgets.customTextFormField(
                     hintText: 'Email',
                     hintStyle: const TextStyle(color: Colors.black),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Email Can\'t Be Empty';
-                      } else if (!value.contains('@') || !value.contains('.')) {
-                        return 'put valid email';
-                      }
-                      return null;
-                    },
+                    // validator: (value) {
+                    //   if (value == null || value.isEmpty) {
+                    //     return 'Email Can\'t Be Empty';
+                    //   } else if (!value.contains('@') || !value.contains('.')) {
+                    //     return 'put valid email';
+                    //   }
+                    //   return null;
+                    // },
                     controller: _emailController,
                     textInputType: TextInputType.emailAddress,
                     prefixIcon: const Icon(Icons.email_outlined)),
@@ -72,13 +72,14 @@ class _LoginState extends State<Login> {
                     padding: const EdgeInsets.only(top: 10.0),
                     child: CommonWidgets.customTextFormField(
                         hintText: 'Password',
+                        obscureText: true,
                         //    maxLength: 18,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Password Can\'t Be Empty';
-                          }
-                          return null;
-                        },
+                        // validator: (value) {
+                        //   if (value == null || value.isEmpty) {
+                        //     return 'Password Can\'t Be Empty';
+                        //   }
+                        //   return null;
+                        // },
                         controller: _pwdController,
                         prefixIcon: const Icon(Icons.password),
                         suffixIcon: const Icon(Icons.remove_red_eye_outlined),
@@ -111,10 +112,10 @@ class _LoginState extends State<Login> {
                               ? 'Invalid or Empty Email'
                               : 'Password can\'t be Empty',
                           backgroundColor: Colors.black,
-                          fontSize: 16,
-                          textColor: Colors.white,
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER_RIGHT,
+                          // fontSize: 16,
+                          // textColor: Colors.white,
+                          // toastLength: Toast.LENGTH_SHORT,
+                          // gravity: ToastGravity.CENTER_RIGHT,
                         );
                       } else {
                         final status =

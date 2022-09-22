@@ -2,11 +2,13 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tailor/account_creations/login_provider.dart';
 import 'package:tailor/screens/add_item_practice.dart';
 import 'package:tailor/screens/customer_detail_page.dart';
 import 'package:tailor/screens/model_add_customer.dart';
 import 'package:tailor/screens/add_customer.dart';
+import 'package:tailor/utils/widgets.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -16,7 +18,8 @@ class DashBoard extends StatefulWidget {
   static bool check = true;
   static bool isSearching = false;
   static List dataList = [];
-
+  static bool? editing = false;
+  static Map<String, dynamic>? map = {};
   @override
   State<DashBoard> createState() => _DashBoardState();
 }
@@ -29,6 +32,9 @@ class _DashBoardState extends State<DashBoard> {
   late User? user;
   late Stream<QuerySnapshot> userStream;
   late TextEditingController _searchController;
+  late final TextEditingController _nameController;
+  late final TextEditingController _phoneController;
+  late final TextEditingController _addressController;
 
   @override
   void initState() {
@@ -39,11 +45,27 @@ class _DashBoardState extends State<DashBoard> {
     getData();
     _searchController = TextEditingController();
     _searchController.addListener(() => setState(() {}));
+    _nameController = TextEditingController(
+        text: DashBoard.editing!
+            ? DashBoard.map![ModelAddCustomer.keyFullName]
+            : '');
+
+    _phoneController = TextEditingController(
+        text: DashBoard.editing!
+            ? DashBoard.map![ModelAddCustomer.keyPhoneNumber]
+            : '');
+    _addressController = TextEditingController(
+        text: DashBoard.editing!
+            ? DashBoard.map![ModelAddCustomer.keyAddress]
+            : '');
   }
 
   @override
   void dispose() {
     super.dispose();
+    _nameController.dispose();
+    _phoneController.dispose();
+    _addressController.dispose();
     _searchController.dispose();
   }
 
@@ -521,13 +543,79 @@ class _DashBoardState extends State<DashBoard> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print(MediaQuery.of(context).size.height);
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      //AddItem()
-                      const AddItemPractice()));
+          print('btn called');
+          showModalBottomSheet(
+              context: context,
+              backgroundColor: Colors.transparent,
+              isDismissible: false,
+              enableDrag: false,
+              isScrollControlled: true,
+              // shape: const RoundedRectangleBorder(
+              //     borderRadius:
+              //         BorderRadius.vertical(top: Radius.circular(20))),
+              builder: (context) => showCustomerBottomSheet());
+          // showGeneralDialog(
+          //     context: context,
+          //     pageBuilder: (context, animation, secondaryAnimation) =>
+          //         AlertDialog(
+          //           title: const Text('Add Customer Details'),
+          //           scrollable: true,
+          //           content: buildContent(),
+          //           alignment: Alignment.center,
+          //           actions: [buildActions()],
+          //           shape: RoundedRectangleBorder(
+          //               side: BorderSide(color: Colors.green, width: 5),
+          //               borderRadius: BorderRadius.circular(20)),
+          //         ));
+
+          // AwesomeDialog(
+          //         context: context,
+          //         animType: AnimType.BOTTOMSLIDE,
+          //         aligment: Alignment.center,
+          //         autoDismiss: false,
+          //         dialogType: DialogType.INFO_REVERSED,
+          //         // btnOkOnPress: () {},
+          //         dismissOnTouchOutside: true,
+          //         // customHeader: const Text('Custom Header'),
+          //         dismissOnBackKeyPress: true,
+          //         title: 'This is title',
+          //         enableEnterKey: true,
+          //         btnOk: ElevatedButton(
+          //           onPressed: () {
+          //             if (!hasBeenShown) {
+          //               Navigator.pop(context);
+          //               hasBeenShown = false;
+          //             }
+          //           },
+          //           child: const Text('Ok Button'),
+          //         ),
+          //         // btnCancelOnPress: () {
+          //         //   Navigator.pop(context);
+          //         // },
+          //         btnCancel: ElevatedButton(
+          //             onPressed: () {
+          //               if (!hasBeenShown) {
+          //                 Navigator.pop(context);
+          //                 hasBeenShown = false;
+          //               }
+          //             },
+          //             child: const Text('Cancel')),
+          //         // width: 400,
+          //         desc: 'Description//////////////////',
+          //         dialogBackgroundColor: Colors.white,
+          //         onDissmissCallback: (value) {
+          //           Navigator.pop(context);
+          //         },
+          //         useRootNavigator: true)
+          //     .show();
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) =>
+          //
+          //             //AddItem()
+          //            // const AddItemPractice()
+          // ));
         },
         child: const Icon(Icons.add),
       ),
@@ -614,6 +702,101 @@ class _DashBoardState extends State<DashBoard> {
           contentPadding:
               const EdgeInsets.only(top: 3, left: 15, right: 0.0, bottom: 15),
         ),
+      ),
+    );
+  }
+
+  Widget buildContent() {
+    return Column(
+      children: [
+        CommonWidgets.customTextFormField(
+            hintText: 'Full Name',
+            controller: _nameController,
+            textInputType: TextInputType.text,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp('[a-zA-Z 0-9]'))
+            ],
+            prefixIcon: const Icon(Icons.person_add_alt_outlined),
+            validator: (value) {
+              return CommonWidgets.customValidator('$value');
+            }),
+        const SizedBox(height: 10.0),
+        CommonWidgets.customTextFormField(
+            controller: _phoneController,
+            textInputType: TextInputType.phone,
+            hintText: 'Phone Number',
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            prefixIcon: const Icon(Icons.phone_enabled_outlined),
+            validator: (value) {
+              return CommonWidgets.customValidator('$value');
+            }),
+        const SizedBox(height: 10.0),
+        CommonWidgets.customTextFormField(
+            textInputType: TextInputType.streetAddress,
+            hintText: 'Address',
+            controller: _addressController,
+            prefixIcon: const Icon(Icons.maps_home_work_outlined, size: 20),
+            validator: (value) {
+              return CommonWidgets.customValidator('$value');
+            }),
+      ],
+    );
+  }
+
+  Widget buildActions() {
+    return Column(
+      children: [
+        CommonWidgets.customBtn(
+            name: 'Cancel',
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+        CommonWidgets.customBtn(
+            name: 'Save',
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+        CommonWidgets.customBtn(
+            name: 'Add Measurements',
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+      ],
+    );
+  }
+
+  Widget showCustomerBottomSheet() {
+    return Container(
+      height: MediaQuery.of(context).size.height - 70,
+      padding: EdgeInsets.only(right: 10, left: 0.0),
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 0.0),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          AppBar(
+            elevation: 0.0,
+            backgroundColor: Colors.transparent,
+            leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios_sharp,
+                  color: Colors.green,
+                )),
+          ),
+          const Text(
+            'Add Customer Details',
+            style: TextStyle(
+                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          CommonWidgets.customTextFormField(hintText: 'First Name'),
+          CommonWidgets.customTextFormField(hintText: 'Last Name'),
+          CommonWidgets.customTextFormField(hintText: 'Phone Number'),
+          CommonWidgets.customTextFormField(hintText: 'Address'),
+        ]),
       ),
     );
   }

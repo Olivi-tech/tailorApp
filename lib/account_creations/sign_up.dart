@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tailor/account_creations/login_provider.dart';
-import 'package:tailor/screens/dashboard.dart';
 import 'package:tailor/utils/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
