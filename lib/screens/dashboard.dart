@@ -768,12 +768,12 @@ class _DashBoardState extends State<DashBoard> {
   Widget showCustomerBottomSheet() {
     return Container(
       height: MediaQuery.of(context).size.height - 70,
-      padding: EdgeInsets.only(right: 10, left: 0.0),
+      // padding: EdgeInsets.only(right: 10, left: 0.0),
       decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 0.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           AppBar(
             elevation: 0.0,
@@ -790,12 +790,24 @@ class _DashBoardState extends State<DashBoard> {
           const Text(
             'Add Customer Details',
             style: TextStyle(
-                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
           ),
-          CommonWidgets.customTextFormField(hintText: 'First Name'),
-          CommonWidgets.customTextFormField(hintText: 'Last Name'),
-          CommonWidgets.customTextFormField(hintText: 'Phone Number'),
-          CommonWidgets.customTextFormField(hintText: 'Address'),
+          CommonWidgets.customTextFormField(
+              hintText: 'First Name',
+              textInputType: TextInputType.name,
+              prefixIcon: const Icon(Icons.person_add_alt_1_rounded)),
+          CommonWidgets.customTextFormField(
+              hintText: 'Last Name',
+              textInputType: TextInputType.name,
+              prefixIcon: const Icon(Icons.person_add_alt_1_rounded)),
+          CommonWidgets.customTextFormField(
+              hintText: 'Phone Number',
+              textInputType: TextInputType.phone,
+              prefixIcon: const Icon(Icons.phone_android)),
+          CommonWidgets.customTextFormField(
+              hintText: 'Address',
+              textInputType: TextInputType.streetAddress,
+              prefixIcon: const Icon(Icons.place)),
         ]),
       ),
     );

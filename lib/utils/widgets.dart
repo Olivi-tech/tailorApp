@@ -42,7 +42,9 @@ class CommonWidgets {
       elevation: 1,
       color: Colors.white,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(
+          30,
+        ),
       ),
       child: TextFormField(
         keyboardType: textInputType,
@@ -60,6 +62,11 @@ class CommonWidgets {
           hintStyle: hintStyle,
           suffixIcon: suffixIcon,
           border: InputBorder.none,
+
+          focusedBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          errorBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
 
           // border: OutlineInputBorder(
           //     borderRadius: BorderRadius.circular(20),
