@@ -25,7 +25,8 @@ class _AddItemState extends State<AddItem> {
   final GlobalKey<FormState> _formKeyMeasurement = GlobalKey<FormState>();
 
   ///adding customer info///
-  late final TextEditingController _nameController;
+  late final TextEditingController _firstNameController;
+  late final TextEditingController _lastNameController;
   late final TextEditingController _phoneController;
   late final TextEditingController _addressController;
 
@@ -44,8 +45,12 @@ class _AddItemState extends State<AddItem> {
   @override
   void initState() {
     /// customer ///
-    _nameController = TextEditingController(
-        text: widget.editing! ? widget.map![ModelAddCustomer.keyFullName] : '');
+    _firstNameController = TextEditingController(
+        text:
+            widget.editing! ? widget.map![ModelAddCustomer.keyFirstName] : '');
+
+    _lastNameController = TextEditingController(
+        text: widget.editing! ? widget.map![ModelAddCustomer.keyLastName] : '');
 
     _phoneController = TextEditingController(
         text: widget.editing!
@@ -79,9 +84,10 @@ class _AddItemState extends State<AddItem> {
     _calfController = TextEditingController(
         text: widget.editing! ? widget.map![ModelAddCustomer.keyCalf] : '');
 
-    _nameController.addListener(() => setState(() {}));
+    _firstNameController.addListener(() => setState(() {}));
     super.initState();
-    print('////////empty=${_nameController.text.isEmpty}///////////////////');
+    print(
+        '////////empty=${_firstNameController.text.isEmpty}///////////////////');
     print('//////empty=${_addressController.text.isEmpty}///////////////////');
     print('/////empty=${_phoneController.text.isEmpty}///////////////////');
   }
@@ -89,7 +95,7 @@ class _AddItemState extends State<AddItem> {
   @override
   void dispose() {
     ///customer /////
-    _nameController.dispose();
+    _firstNameController.dispose();
     _phoneController.dispose();
     _addressController.dispose();
 
@@ -116,7 +122,8 @@ class _AddItemState extends State<AddItem> {
         FirebaseFirestore.instance.collection(currentUser!.uid);
     Future<void> addCustomer() async {
       var obj = ModelAddCustomer(
-          fullName: _nameController.text,
+          firstName: _firstNameController.text,
+          lastName: _lastNameController.text,
           phoneNumber: _phoneController.text,
           address: _addressController.text,
           collar: _collarController.text,
@@ -157,8 +164,8 @@ class _AddItemState extends State<AddItem> {
                       showCloseIcon: true,
                       title: 'Success',
                       desc: widget.editing!
-                          ? 'Updated ${_nameController.text}'
-                          : 'Added ${_nameController.text}',
+                          ? 'Updated ${_firstNameController.text}'
+                          : 'Added ${_firstNameController.text}',
                       btnOkOnPress: () {
                         debugPrint('OnClick');
                       },
@@ -219,7 +226,7 @@ class _AddItemState extends State<AddItem> {
                     ),
                     CommonWidgets.customTextFormField(
                         hintText: 'Full Name',
-                        controller: _nameController,
+                        controller: _firstNameController,
                         maxLength: 18,
                         textInputType: TextInputType.text,
                         inputFormatters: [

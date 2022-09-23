@@ -5,7 +5,16 @@ class CommonWidgets {
   // static late String hintText;
   static Widget customBtn({
     required String name,
+    double? fontSize = 18.0,
     double? width,
+    FontWeight fontWeight = FontWeight.bold,
+    // Gradient? btnBackGroundGradientColor = const LinearGradient(colors: [
+    //   Colors.deepOrangeAccent,
+    //   Colors.yellow,
+    //   //Colors.indigo
+    // ]),
+    Color? btnBackGroundColor = Colors.brown,
+    Color? btnTextColor = Colors.green,
     double? height,
     required VoidCallback? onPressed,
   }) {
@@ -16,12 +25,12 @@ class CommonWidgets {
         onPressed: onPressed,
         style: ButtonStyle(
             elevation: MaterialStateProperty.all(5.0),
-            backgroundColor: MaterialStateProperty.all(Colors.brown),
+            backgroundColor: MaterialStateProperty.all(btnBackGroundColor),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50.0))),
-            foregroundColor: MaterialStateProperty.all(Colors.green)),
+            foregroundColor: MaterialStateProperty.all(btnTextColor)),
         child: Text(name,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            style: TextStyle(fontSize: fontSize, fontWeight: fontWeight)),
       ),
     );
   }

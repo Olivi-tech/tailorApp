@@ -2,9 +2,9 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:tailor/account_creations/login_provider.dart';
 import 'package:tailor/screens/customer_detail_page.dart';
+import 'package:tailor/screens/cutomer_details/customer_personal_details.dart';
 import 'package:tailor/screens/model_add_customer.dart';
 import 'package:tailor/utils/widgets.dart';
 
@@ -30,7 +30,8 @@ class _DashBoardState extends State<DashBoard> {
   late User? user;
   late Stream<QuerySnapshot> userStream;
   late TextEditingController _searchController;
-  late final TextEditingController _nameController;
+  late final TextEditingController _firstNameController;
+  late final TextEditingController _lastNameController;
   late final TextEditingController _phoneController;
   late final TextEditingController _addressController;
 
@@ -43,9 +44,13 @@ class _DashBoardState extends State<DashBoard> {
     getData();
     _searchController = TextEditingController();
     _searchController.addListener(() => setState(() {}));
-    _nameController = TextEditingController(
+    _firstNameController = TextEditingController(
         text: DashBoard.editing!
-            ? DashBoard.map![ModelAddCustomer.keyFullName]
+            ? DashBoard.map![ModelAddCustomer.keyFirstName]
+            : '');
+    _lastNameController = TextEditingController(
+        text: DashBoard.editing!
+            ? DashBoard.map![ModelAddCustomer.keyLastName]
             : '');
 
     _phoneController = TextEditingController(
@@ -61,7 +66,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   void dispose() {
     super.dispose();
-    _nameController.dispose();
+    _firstNameController.dispose();
     _phoneController.dispose();
     _addressController.dispose();
     _searchController.dispose();
@@ -292,7 +297,9 @@ class _DashBoardState extends State<DashBoard> {
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: ListTile(
                       title: Text(
-                        data[ModelAddCustomer.keyFullName] ?? '',
+                        data[ModelAddCustomer.keyFirstName] +
+                                data[ModelAddCustomer.keyLastName] ??
+                            '',
                         style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -419,7 +426,9 @@ class _DashBoardState extends State<DashBoard> {
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: ListTile(
                       title: Text(
-                        data[ModelAddCustomer.keyFullName] ?? '',
+                        data[ModelAddCustomer.keyFirstName] +
+                                data[ModelAddCustomer.keyLastName] ??
+                            '',
                         style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -551,7 +560,7 @@ class _DashBoardState extends State<DashBoard> {
               // shape: const RoundedRectangleBorder(
               //     borderRadius:
               //         BorderRadius.vertical(top: Radius.circular(20))),
-              builder: (context) => showCustomerBottomSheet());
+              builder: (context) => const CustomerPersonalDetails());
         },
         child: const Icon(Icons.add),
       ),
@@ -638,61 +647,6 @@ class _DashBoardState extends State<DashBoard> {
           contentPadding:
               const EdgeInsets.only(top: 3, left: 15, right: 0.0, bottom: 15),
         ),
-      ),
-    );
-  }
-
-  Widget showCustomerBottomSheet() {
-    return Container(
-      height: MediaQuery.of(context).size.height - 70,
-      // padding: EdgeInsets.only(right: 10, left: 0.0),
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          AppBar(
-            elevation: 0.0,
-            backgroundColor: Colors.transparent,
-            leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.arrow_back_ios_sharp,
-                  color: Colors.green,
-                )),
-          ),
-          const Text(
-            'Add Customer Details',
-            style: TextStyle(
-                color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          CommonWidgets.customTextFormField(
-              hintText: 'First Name',
-              textInputType: TextInputType.name,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp('[a-zA-Z 0-9]'))
-              ],
-              prefixIcon: const Icon(Icons.person_add_alt_1_rounded)),
-          CommonWidgets.customTextFormField(
-              hintText: 'Last Name',
-              textInputType: TextInputType.name,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp('[a-zA-Z 0-9]'))
-              ],
-              prefixIcon: const Icon(Icons.person_add_alt_1_rounded)),
-          CommonWidgets.customTextFormField(
-              hintText: 'Phone Number',
-              textInputType: TextInputType.phone,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              prefixIcon: const Icon(Icons.phone_android)),
-          CommonWidgets.customTextFormField(
-              hintText: 'Address',
-              textInputType: TextInputType.streetAddress,
-              prefixIcon: const Icon(Icons.place)),
-        ]),
       ),
     );
   }

@@ -386,7 +386,8 @@
 //   }
 // }
 class ModelAddCustomer {
-  String? fullName;
+  String? firstName;
+  String? lastName;
   String? phoneNumber;
   String? address;
   String? collar;
@@ -405,7 +406,8 @@ class ModelAddCustomer {
   //   return 'ModelAddCustomer{fullName: $fullName, phoneNumber: $phoneNumber, address: $address, collar: $collar, waist: $waist, armLength: $armLength, biceps: $biceps, wrist: $wrist, length: $length, thigh: $thigh, chest: $chest, inseam: $inseam, shoulder: $shoulder, calf: $calf}';
   // }
 
-  static String keyFullName = 'fullName';
+  static String keyFirstName = 'firstName';
+  static String keyLastName = 'lastName';
   static String keyPhoneNumber = 'phoneNumber';
   static String keyAddress = 'address';
   static String keyCollar = 'collar';
@@ -421,7 +423,8 @@ class ModelAddCustomer {
   static String keyCalf = 'calf';
 
   ModelAddCustomer({
-    this.fullName,
+    this.firstName,
+    this.lastName,
     this.phoneNumber,
     this.address,
     this.shoulder,
@@ -439,7 +442,8 @@ class ModelAddCustomer {
 
   Map<String, dynamic> toMap() {
     return {
-      keyFullName: fullName,
+      keyFirstName: firstName,
+      keyLastName: lastName,
       keyPhoneNumber: phoneNumber,
       keyAddress: address,
       keyCollar: collar,

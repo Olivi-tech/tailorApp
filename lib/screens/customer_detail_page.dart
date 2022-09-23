@@ -74,7 +74,8 @@ class CustomerDetailPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              text(name: 'Full Name : ${map![ModelAddCustomer.keyFullName]}'),
+              text(name: 'First Name : ${map![ModelAddCustomer.keyFirstName]}'),
+              text(name: 'Last Name : ${map![ModelAddCustomer.keyLastName]}'),
               text(
                   name:
                       'Phone Number : ${map![ModelAddCustomer.keyPhoneNumber]}'),
