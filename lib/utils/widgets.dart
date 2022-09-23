@@ -61,9 +61,7 @@ class CommonWidgets {
           prefixIcon: prefixIcon,
           hintStyle: hintStyle,
           suffixIcon: suffixIcon,
-          border: InputBorder.none,
-
-          focusedBorder: InputBorder.none,
+          border: InputBorder.none, focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
           errorBorder: InputBorder.none,
           disabledBorder: InputBorder.none,

@@ -4,10 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tailor/account_creations/login_provider.dart';
-import 'package:tailor/screens/add_item_practice.dart';
 import 'package:tailor/screens/customer_detail_page.dart';
 import 'package:tailor/screens/model_add_customer.dart';
-import 'package:tailor/screens/add_customer.dart';
 import 'package:tailor/utils/widgets.dart';
 
 class DashBoard extends StatefulWidget {
@@ -270,7 +268,7 @@ class _DashBoardState extends State<DashBoard> {
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
                 child: CircularProgressIndicator(
-              color: Colors.blue,
+              color: Colors.green,
             ));
           } else if (snapshot.data!.size == 0) {
             return const Center(
@@ -554,68 +552,6 @@ class _DashBoardState extends State<DashBoard> {
               //     borderRadius:
               //         BorderRadius.vertical(top: Radius.circular(20))),
               builder: (context) => showCustomerBottomSheet());
-          // showGeneralDialog(
-          //     context: context,
-          //     pageBuilder: (context, animation, secondaryAnimation) =>
-          //         AlertDialog(
-          //           title: const Text('Add Customer Details'),
-          //           scrollable: true,
-          //           content: buildContent(),
-          //           alignment: Alignment.center,
-          //           actions: [buildActions()],
-          //           shape: RoundedRectangleBorder(
-          //               side: BorderSide(color: Colors.green, width: 5),
-          //               borderRadius: BorderRadius.circular(20)),
-          //         ));
-
-          // AwesomeDialog(
-          //         context: context,
-          //         animType: AnimType.BOTTOMSLIDE,
-          //         aligment: Alignment.center,
-          //         autoDismiss: false,
-          //         dialogType: DialogType.INFO_REVERSED,
-          //         // btnOkOnPress: () {},
-          //         dismissOnTouchOutside: true,
-          //         // customHeader: const Text('Custom Header'),
-          //         dismissOnBackKeyPress: true,
-          //         title: 'This is title',
-          //         enableEnterKey: true,
-          //         btnOk: ElevatedButton(
-          //           onPressed: () {
-          //             if (!hasBeenShown) {
-          //               Navigator.pop(context);
-          //               hasBeenShown = false;
-          //             }
-          //           },
-          //           child: const Text('Ok Button'),
-          //         ),
-          //         // btnCancelOnPress: () {
-          //         //   Navigator.pop(context);
-          //         // },
-          //         btnCancel: ElevatedButton(
-          //             onPressed: () {
-          //               if (!hasBeenShown) {
-          //                 Navigator.pop(context);
-          //                 hasBeenShown = false;
-          //               }
-          //             },
-          //             child: const Text('Cancel')),
-          //         // width: 400,
-          //         desc: 'Description//////////////////',
-          //         dialogBackgroundColor: Colors.white,
-          //         onDissmissCallback: (value) {
-          //           Navigator.pop(context);
-          //         },
-          //         useRootNavigator: true)
-          //     .show();
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) =>
-          //
-          //             //AddItem()
-          //            // const AddItemPractice()
-          // ));
         },
         child: const Icon(Icons.add),
       ),
@@ -706,65 +642,6 @@ class _DashBoardState extends State<DashBoard> {
     );
   }
 
-  Widget buildContent() {
-    return Column(
-      children: [
-        CommonWidgets.customTextFormField(
-            hintText: 'Full Name',
-            controller: _nameController,
-            textInputType: TextInputType.text,
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp('[a-zA-Z 0-9]'))
-            ],
-            prefixIcon: const Icon(Icons.person_add_alt_outlined),
-            validator: (value) {
-              return CommonWidgets.customValidator('$value');
-            }),
-        const SizedBox(height: 10.0),
-        CommonWidgets.customTextFormField(
-            controller: _phoneController,
-            textInputType: TextInputType.phone,
-            hintText: 'Phone Number',
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            prefixIcon: const Icon(Icons.phone_enabled_outlined),
-            validator: (value) {
-              return CommonWidgets.customValidator('$value');
-            }),
-        const SizedBox(height: 10.0),
-        CommonWidgets.customTextFormField(
-            textInputType: TextInputType.streetAddress,
-            hintText: 'Address',
-            controller: _addressController,
-            prefixIcon: const Icon(Icons.maps_home_work_outlined, size: 20),
-            validator: (value) {
-              return CommonWidgets.customValidator('$value');
-            }),
-      ],
-    );
-  }
-
-  Widget buildActions() {
-    return Column(
-      children: [
-        CommonWidgets.customBtn(
-            name: 'Cancel',
-            onPressed: () {
-              Navigator.pop(context);
-            }),
-        CommonWidgets.customBtn(
-            name: 'Save',
-            onPressed: () {
-              Navigator.pop(context);
-            }),
-        CommonWidgets.customBtn(
-            name: 'Add Measurements',
-            onPressed: () {
-              Navigator.pop(context);
-            }),
-      ],
-    );
-  }
-
   Widget showCustomerBottomSheet() {
     return Container(
       height: MediaQuery.of(context).size.height - 70,
@@ -795,14 +672,21 @@ class _DashBoardState extends State<DashBoard> {
           CommonWidgets.customTextFormField(
               hintText: 'First Name',
               textInputType: TextInputType.name,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp('[a-zA-Z 0-9]'))
+              ],
               prefixIcon: const Icon(Icons.person_add_alt_1_rounded)),
           CommonWidgets.customTextFormField(
               hintText: 'Last Name',
               textInputType: TextInputType.name,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp('[a-zA-Z 0-9]'))
+              ],
               prefixIcon: const Icon(Icons.person_add_alt_1_rounded)),
           CommonWidgets.customTextFormField(
               hintText: 'Phone Number',
               textInputType: TextInputType.phone,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               prefixIcon: const Icon(Icons.phone_android)),
           CommonWidgets.customTextFormField(
               hintText: 'Address',
