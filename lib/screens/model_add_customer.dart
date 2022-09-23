@@ -440,6 +440,11 @@ class ModelAddCustomer {
     this.calf,
   });
 
+  @override
+  String toString() {
+    return 'ModelAddCustomer{firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, address: $address, collar: $collar, waist: $waist, armLength: $armLength, biceps: $biceps, wrist: $wrist, length: $length, thigh: $thigh, chest: $chest, inseam: $inseam, shoulder: $shoulder, calf: $calf}';
+  }
+
   Map<String, dynamic> toMap() {
     return {
       keyFirstName: firstName,
