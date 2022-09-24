@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tailor/screens/cutomer_details/add_collar.dart';
 import 'package:tailor/screens/model_add_customer.dart';
 import 'package:tailor/utils/widgets.dart';
 
@@ -56,7 +55,7 @@ class _CustomerPersonalDetailsState extends State<CustomerPersonalDetails> {
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Container(
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height - 50,
         // padding: EdgeInsets.only(right: 10, left: 0.0),
         decoration: const BoxDecoration(
             color: Colors.white,
@@ -122,23 +121,32 @@ class _CustomerPersonalDetailsState extends State<CustomerPersonalDetails> {
                   CommonWidgets.customBtn(
                     name: 'Add Measurements',
                     onPressed: () {
-                      if (_firstNameController.text.isEmpty ||
-                          _lastNameController.text.isEmpty ||
-                          _phoneController.text.isEmpty) {
-                        Fluttertoast.showToast(
-                            msg: _firstNameController.text.isEmpty ||
-                                    _lastNameController.text.isEmpty
-                                ? 'name can\'t be empty'
-                                : 'phone number can\'t be empty');
-                      } else if (_addressController.text.isEmpty) {
-                        Fluttertoast.showToast(msg: 'Address Can\'t be empty');
-                      } else {
-                        modelAddCustomer.firstName = _firstNameController.text;
-                        modelAddCustomer.lastName = _lastNameController.text;
-                        modelAddCustomer.phoneNumber = _phoneController.text;
-                        modelAddCustomer.address = _addressController.text;
-                        print(modelAddCustomer.toString());
-                      }
+                      // if (_firstNameController.text.isEmpty ||
+                      //     _lastNameController.text.isEmpty ||
+                      //     _phoneController.text.isEmpty) {
+                      //   Fluttertoast.showToast(
+                      //       msg: _firstNameController.text.isEmpty ||
+                      //               _lastNameController.text.isEmpty
+                      //           ? 'name can\'t be empty'
+                      //           : 'phone number can\'t be empty');
+                      // } else if (_addressController.text.isEmpty) {
+                      //   Fluttertoast.showToast(msg: 'Address Can\'t be empty');
+                      // } else {
+                      //   modelAddCustomer.firstName = _firstNameController.text;
+                      //   modelAddCustomer.lastName = _lastNameController.text;
+                      //   modelAddCustomer.phoneNumber = _phoneController.text;
+                      //   modelAddCustomer.address = _addressController.text;
+                      //   print(modelAddCustomer.toString());
+                      //   Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => const AddCollar()));
+                      // }
+                      //
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AddCollar()));
                     },
                     width: width * 0.9,
                     height: height * 0.06,
