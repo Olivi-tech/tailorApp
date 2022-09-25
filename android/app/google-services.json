@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "32946753318",
+    "project_id": "tailor-app-48212",
+    "storage_bucket": "tailor-app-48212.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32946753318:android:9cbe22add9f6b297393be7",
+        "android_client_info": {
+          "package_name": "tailor.shakilawan.com.tailor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32946753318-so9d3fc4olikmre59bgnih0fuu69gsg3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tailor.shakilawan.com.tailor",
+            "certificate_hash": "d4b35d3a57f1107e7d508d63c4c971f74a9bcd1e"
+          }
+        },
+        {
+          "client_id": "32946753318-j2031m6nbpl98b24s9o0ipcm0q6ei92d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsdmoR03rfEqkJDKaVIeS8NtNpqCN2fNI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32946753318-j2031m6nbpl98b24s9o0ipcm0q6ei92d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

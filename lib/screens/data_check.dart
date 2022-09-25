@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tailor/screens/dashboard.dart';
 
 import '../account_creations/login.dart';
+
 ///////////////////////////////////////////////////////////
 class DataCheck extends StatelessWidget {
   const DataCheck({Key? key}) : super(key: key);
@@ -19,17 +20,18 @@ class DataCheck extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return const Center(
-                child: Text(
-              'Some Thing Has Went Wrong',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  backgroundColor: Colors.red),
-            ));
+              child: Text(
+                'Some Thing Has Went Wrong',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                    backgroundColor: Colors.red),
+              ),
+            );
           } else if (snapshot.hasData) {
             return const DashBoard();
           }
-          return Login();
+          return const Login();
         });
     // return Login();
   }

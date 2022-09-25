@@ -266,9 +266,11 @@ class _DashBoardState extends State<DashBoard> {
         stream: userStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
-            return const Text(
-              'Something went wrong',
-              style: TextStyle(fontWeight: FontWeight.bold),
+            return const Center(
+              child: Text(
+                'Something went wrong',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             );
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
