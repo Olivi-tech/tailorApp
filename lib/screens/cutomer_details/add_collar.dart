@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tailor/utils/widgets.dart';
 
 class AddCollar extends StatelessWidget {
@@ -22,14 +23,19 @@ class AddCollar extends StatelessWidget {
           Padding(
               padding: EdgeInsets.only(top: height * 0.8),
               child: Column(
-                //    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   SizedBox(
                       width: width * 0.85,
                       height: height * 0.09,
                       child: CommonWidgets.customTextFormField(
-                          hintText: 'Tap  to Select',
-                          hintStyle: TextStyle(
+                          hintText: 'Collar',
+                          onTap: () {
+                            Fluttertoast.showToast(msg: 'select');
+                          },
+                          suffixIcon: const Icon(Icons.arrow_drop_down_outlined,
+                              color: Colors.black),
+                          hintStyle: const TextStyle(
                               color: Colors.black, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center)),
                   CommonWidgets.customBtn(

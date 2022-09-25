@@ -35,21 +35,24 @@ class CommonWidgets {
     );
   }
 
-  static Widget customTextFormField(
-      {required String? hintText,
-      String? Function(String?)? validator,
-      Icon? prefixIcon,
-      TextAlign textAlign = TextAlign.start,
-      List<TextInputFormatter>? inputFormatters,
-      String? initialValue,
-      TextEditingController? controller,
-      Icon? suffixIcon,
-      BoxConstraints? boxConstraints =
-          const BoxConstraints(maxHeight: 50, minHeight: 50),
-      int? maxLength,
-      TextInputType? textInputType,
-      TextStyle? hintStyle,
-      bool obscureText = false}) {
+  static Widget customTextFormField({
+    required String? hintText,
+    String? Function(String?)? validator,
+    Icon? prefixIcon,
+    TextAlign textAlign = TextAlign.start,
+    List<TextInputFormatter>? inputFormatters,
+    String? initialValue,
+    Widget? suffixWidget,
+    TextEditingController? controller,
+    Icon? suffixIcon,
+    BoxConstraints? boxConstraints =
+        const BoxConstraints(maxHeight: 50, minHeight: 50),
+    int? maxLength,
+    TextInputType? textInputType,
+    TextStyle? hintStyle,
+    bool obscureText = false,
+    void Function()? onTap,
+  }) {
     return Card(
       elevation: 1,
       color: Colors.white,
@@ -62,6 +65,7 @@ class CommonWidgets {
         keyboardType: textInputType,
         initialValue: initialValue,
         textAlign: textAlign,
+        onTap: onTap,
         inputFormatters: inputFormatters,
         validator: validator,
         controller: controller,
@@ -69,6 +73,7 @@ class CommonWidgets {
         obscureText: obscureText,
         decoration: InputDecoration(
           constraints: boxConstraints,
+          suffix: suffixWidget,
           hintText: hintText,
           contentPadding: const EdgeInsets.only(left: 20, top: 15),
           prefixIcon: prefixIcon,
