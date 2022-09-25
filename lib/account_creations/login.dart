@@ -36,6 +36,8 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    print(height);
+    print(width);
     // final isKeyBoard = MediaQuery.of(context).viewInsets.bottom != 0;
     return SafeArea(
         child: Scaffold(
@@ -44,10 +46,14 @@ class _LoginState extends State<Login> {
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(children: <Widget>[
-          const Image(
-            // fit: BoxFit.cover,
-            image: AssetImage(
-              'assets/images/logo.png',
+          SizedBox(
+            width: width,
+            height: height * 0.4,
+            child: const Image(
+              fit: BoxFit.fill,
+              image: AssetImage(
+                'assets/images/logo.png',
+              ),
             ),
           ),
           Form(
