@@ -27,7 +27,7 @@ class AddCollar extends StatelessWidget {
                 children: [
                   SizedBox(
                       width: width * 0.85,
-                      height: height * 0.09,
+                      height: height * 0.075,
                       child: CommonWidgets.customTextFormField(
                           hintText: 'Collar',
                           onTap: () {
@@ -40,7 +40,7 @@ class AddCollar extends StatelessWidget {
                           textAlign: TextAlign.center)),
                   CommonWidgets.customBtn(
                       width: width * 0.83,
-                      height: height * 0.08,
+                      height: height * 0.066,
                       btnTextColor: Colors.black,
                       btnBackGroundColor: Colors.white,
                       name: 'Next',
