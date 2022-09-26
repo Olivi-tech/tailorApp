@@ -80,7 +80,7 @@ class CustomerDetailPage extends StatelessWidget {
                   name:
                       'Phone Number : ${map![ModelAddCustomer.keyPhoneNumber]}'),
               text(name: 'Address :${map![ModelAddCustomer.keyAddress]}'),
-              text(name: 'Collar : ${map![ModelAddCustomer.keyCollar]}'),
+              text(name: 'Neck : ${map![ModelAddCustomer.keyNeck]}'),
               text(name: 'Shoulder : ${map![ModelAddCustomer.keyShoulder]}'),
               text(name: 'Chest : ${map![ModelAddCustomer.keyChest]}'),
               text(name: 'Waist : ${map![ModelAddCustomer.keyWaist]}'),

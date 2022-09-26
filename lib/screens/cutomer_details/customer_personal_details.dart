@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tailor/screens/cutomer_details/add_collar.dart';
+import 'package:tailor/screens/cutomer_details/add_neck.dart';
 import 'package:tailor/screens/model_add_customer.dart';
 import 'package:tailor/utils/widgets.dart';
 
@@ -146,17 +145,11 @@ class _CustomerPersonalDetailsState extends State<CustomerPersonalDetails> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const AddCollar()));
+                              builder: (context) => const AddNeck()));
                     },
                     width: width * 0.9,
                     height: height * 0.06,
                   ),
-                  // const SizedBox(height: 10),
-                  // CommonWidgets.customBtn(
-                  //     name: 'Add Measurements',
-                  //     onPressed: () {},
-                  //     width: width * 0.9,
-                  //     height: height * 0.06),
                   const SizedBox(height: 10),
                   CommonWidgets.customBtn(
                       name: 'Cancel',

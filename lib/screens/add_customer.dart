@@ -61,7 +61,7 @@ class _AddItemState extends State<AddItem> {
 
     ///customer's Measurements ///
     _collarController = TextEditingController(
-        text: widget.editing! ? widget.map![ModelAddCustomer.keyCollar] : '');
+        text: widget.editing! ? widget.map![ModelAddCustomer.keyNeck] : '');
     _shoulderController = TextEditingController(
         text: widget.editing! ? widget.map![ModelAddCustomer.keyShoulder] : '');
     _chestController = TextEditingController(
@@ -126,7 +126,7 @@ class _AddItemState extends State<AddItem> {
           lastName: _lastNameController.text,
           phoneNumber: _phoneController.text,
           address: _addressController.text,
-          collar: _collarController.text,
+          neck: _collarController.text,
           armLength: _armLengthController.text,
           biceps: _bicepsController.text,
           calf: _calfController.text,

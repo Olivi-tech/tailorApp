@@ -3,7 +3,7 @@ class ModelAddCustomer {
   String? lastName;
   String? phoneNumber;
   String? address;
-  String? collar;
+  String? neck;
   String? waist;
   String? armLength;
   String? biceps;
@@ -23,7 +23,7 @@ class ModelAddCustomer {
   static String keyLastName = 'lastName';
   static String keyPhoneNumber = 'phoneNumber';
   static String keyAddress = 'address';
-  static String keyCollar = 'collar';
+  static String keyNeck = 'neck';
   static String keyShoulder = 'shoulder';
   static String keyChest = 'chest';
   static String keyWaist = 'waist';
@@ -41,7 +41,7 @@ class ModelAddCustomer {
     this.phoneNumber,
     this.address,
     this.shoulder,
-    this.collar,
+    this.neck,
     this.chest,
     this.waist,
     this.armLength,
@@ -55,7 +55,7 @@ class ModelAddCustomer {
 
   @override
   String toString() {
-    return 'ModelAddCustomer{firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, address: $address, collar: $collar, waist: $waist, armLength: $armLength, biceps: $biceps, wrist: $wrist, length: $length, thigh: $thigh, chest: $chest, inseam: $inseam, shoulder: $shoulder, calf: $calf}';
+    return 'ModelAddCustomer{firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, address: $address, collar: $neck, waist: $waist, armLength: $armLength, biceps: $biceps, wrist: $wrist, length: $length, thigh: $thigh, chest: $chest, inseam: $inseam, shoulder: $shoulder, calf: $calf}';
   }
 
   Map<String, dynamic> toMap() {
@@ -64,7 +64,7 @@ class ModelAddCustomer {
       keyLastName: lastName,
       keyPhoneNumber: phoneNumber,
       keyAddress: address,
-      keyCollar: collar,
+      keyNeck: neck,
       keyChest: chest,
       keyShoulder: shoulder,
       keyWaist: waist,

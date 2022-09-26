@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CommonWidgets {
   // static late String hintText;
@@ -148,6 +149,80 @@ class CommonWidgets {
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
                   borderSide: const BorderSide(color: Colors.deepPurple))),
+        ),
+      ),
+    );
+  }
+
+  static Widget addCustomerDetails({
+    required BuildContext context,
+    required List<String> list,
+    required String stringAssetImg,
+    required String name,
+    required void Function(String?)? onPressed,
+    required void Function()? nextOnPressed,
+    required String? value,
+  }) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    // String? value;
+    return Material(
+      child: Container(
+        color: Colors.teal.withOpacity(1),
+        width: width,
+        height: height,
+        child: Stack(
+          alignment: Alignment.center,
+          fit: StackFit.expand,
+          children: [
+            Image(image: AssetImage(stringAssetImg), fit: BoxFit.cover),
+            Padding(
+                padding: EdgeInsets.only(top: height * 0.8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: width * 0.5,
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30)),
+                      height: height <= 700 ? height * 0.075 : height * 0.065,
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton(
+                          hint: Text(
+                            name,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.black),
+                          ),
+                          iconSize: 30,
+                          items: list
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          value: value,
+                          isExpanded: true,
+                          onChanged: onPressed,
+                        ),
+                      ),
+                    ),
+                    CommonWidgets.customBtn(
+                      width: width * 0.5,
+                      height: height <= 700 ? height * 0.072 : height * 0.05,
+                      btnTextColor: Colors.black,
+                      btnBackGroundColor: Colors.white,
+                      name: 'Next',
+                      fontSize: 15,
+                      onPressed: nextOnPressed,
+                    ),
+                  ],
+                ))
+          ],
         ),
       ),
     );
