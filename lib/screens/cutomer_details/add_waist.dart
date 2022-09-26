@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tailor/screens/cutomer_details/add_shoulder.dart';
+import 'package:tailor/screens/cutomer_details/add_arm_length.dart';
 import 'package:tailor/utils/widgets.dart';
 
 class AddWaist extends StatefulWidget {
@@ -29,9 +29,8 @@ class _AddWaistState extends State<AddWaist> {
           if (value == null || value!.isEmpty) {
             Fluttertoast.showToast(msg: 'Select Value');
           } else {
-            //   Navigator.push(context,
-            //       MaterialPageRoute(builder: (context) => const AddShoulder()));
-            //
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const AddArmLength()));
           }
         });
   }
