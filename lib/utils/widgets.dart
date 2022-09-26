@@ -227,4 +227,26 @@ class CommonWidgets {
       ),
     );
   }
+
+  static List<String> generateList(int length, int intStartFrom) {
+    List<String> finalList = [];
+    for (int index = 0; index < length; index++) {
+      for (int loopIndex = 0; loopIndex < 4; loopIndex++) {
+        switch (loopIndex) {
+          case 0:
+            finalList.add('${index + intStartFrom}"');
+            break;
+          case 1:
+            finalList.add('${index + intStartFrom} 1/4"');
+            break;
+          case 2:
+            finalList.add('${index + intStartFrom} 1/2"');
+            break;
+          case 3:
+            finalList.add('${index + intStartFrom} 3/4"');
+        }
+      }
+    }
+    return finalList;
+  }
 }

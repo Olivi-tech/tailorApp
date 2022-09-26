@@ -60,7 +60,7 @@ class _AddNeckState extends State<AddNeck> {
     return CommonWidgets.addCustomerDetails(
         context: context,
         list: list,
-        name: 'Shoulder',
+        name: 'Neck',
         value: value,
         onPressed: (String? value) {
           setState(() {
