@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tailor/screens/cutomer_details/add_neck.dart';
 import 'package:tailor/screens/model_add_customer.dart';
 import 'package:tailor/utils/widgets.dart';
@@ -7,6 +8,7 @@ import 'package:tailor/utils/widgets.dart';
 import '../dashboard.dart';
 
 class CustomerPersonalDetails extends StatefulWidget {
+  static final ModelAddCustomer modelAddCustomer = ModelAddCustomer();
   const CustomerPersonalDetails({Key? key}) : super(key: key);
   static bool? editing = false;
   static Map<String, dynamic>? map = {};
@@ -17,7 +19,6 @@ class CustomerPersonalDetails extends StatefulWidget {
 }
 
 class _CustomerPersonalDetailsState extends State<CustomerPersonalDetails> {
-  static final ModelAddCustomer modelAddCustomer = ModelAddCustomer();
   late final TextEditingController _firstNameController;
   late final TextEditingController _lastNameController;
   late final TextEditingController _phoneController;
@@ -120,32 +121,31 @@ class _CustomerPersonalDetailsState extends State<CustomerPersonalDetails> {
                   CommonWidgets.customBtn(
                     name: 'Add Measurements',
                     onPressed: () {
-                      // if (_firstNameController.text.isEmpty ||
-                      //     _lastNameController.text.isEmpty ||
-                      //     _phoneController.text.isEmpty) {
-                      //   Fluttertoast.showToast(
-                      //       msg: _firstNameController.text.isEmpty ||
-                      //               _lastNameController.text.isEmpty
-                      //           ? 'name can\'t be empty'
-                      //           : 'phone number can\'t be empty');
-                      // } else if (_addressController.text.isEmpty) {
-                      //   Fluttertoast.showToast(msg: 'Address Can\'t be empty');
-                      // } else {
-                      //   modelAddCustomer.firstName = _firstNameController.text;
-                      //   modelAddCustomer.lastName = _lastNameController.text;
-                      //   modelAddCustomer.phoneNumber = _phoneController.text;
-                      //   modelAddCustomer.address = _addressController.text;
-                      //   print(modelAddCustomer.toString());
-                      //   Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) => const AddCollar()));
-                      // }
-                      //
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const AddNeck()));
+                      if (_firstNameController.text.isEmpty ||
+                          _lastNameController.text.isEmpty ||
+                          _phoneController.text.isEmpty) {
+                        Fluttertoast.showToast(
+                            msg: _firstNameController.text.isEmpty ||
+                                    _lastNameController.text.isEmpty
+                                ? 'Enter Name'
+                                : 'Enter Phone Number');
+                      } else if (_addressController.text.isEmpty) {
+                        Fluttertoast.showToast(msg: 'Enter Address');
+                      } else {
+                        CustomerPersonalDetails.modelAddCustomer.firstName =
+                            _firstNameController.text;
+                        CustomerPersonalDetails.modelAddCustomer.lastName =
+                            _lastNameController.text;
+                        CustomerPersonalDetails.modelAddCustomer.phoneNumber =
+                            _phoneController.text;
+                        CustomerPersonalDetails.modelAddCustomer.address =
+                            _addressController.text;
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AddNeck()));
+                        // print(modelAddCustomer.toString());
+                      }
                     },
                     width: width * 0.9,
                     height: height * 0.06,

@@ -168,7 +168,7 @@ class CommonWidgets {
     // String? value;
     return Material(
       child: Container(
-        color: Colors.teal.withOpacity(1),
+        color: Colors.teal.withOpacity(0.5),
         width: width,
         height: height,
         child: Stack(
@@ -177,9 +177,9 @@ class CommonWidgets {
           children: [
             Image(image: AssetImage(stringAssetImg), fit: BoxFit.cover),
             Padding(
-                padding: EdgeInsets.only(top: height * 0.8),
+                padding: EdgeInsets.only(top: height * 0.85),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
                       width: width * 0.5,
@@ -187,7 +187,7 @@ class CommonWidgets {
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(30)),
-                      height: height <= 700 ? height * 0.075 : height * 0.065,
+                      height: height <= 700 ? height * 0.063 : height * 0.05,
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton(
                           hint: Text(
@@ -211,9 +211,10 @@ class CommonWidgets {
                         ),
                       ),
                     ),
+                    SizedBox(height: height * 0.01),
                     CommonWidgets.customBtn(
                       width: width * 0.5,
-                      height: height <= 700 ? height * 0.072 : height * 0.05,
+                      height: height <= 700 ? height * 0.063 : height * 0.05,
                       btnTextColor: Colors.black,
                       btnBackGroundColor: Colors.white,
                       name: 'Next',

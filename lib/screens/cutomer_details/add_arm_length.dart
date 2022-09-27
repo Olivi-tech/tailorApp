@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tailor/screens/cutomer_details/add_biceps.dart';
+import 'package:tailor/screens/cutomer_details/customer_personal_details.dart';
 import 'package:tailor/utils/widgets.dart';
 
 class AddArmLength extends StatefulWidget {
@@ -28,8 +30,9 @@ class _AddArmLengthState extends State<AddArmLength> {
         if (value == null || value!.isEmpty) {
           Fluttertoast.showToast(msg: 'Select Value');
         } else {
-          //   Navigator.push(context,
-          //       MaterialPageRoute(builder: (context) => const AddArmLength()));
+          CustomerPersonalDetails.modelAddCustomer.armLength = value!;
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddBiceps()));
         }
       },
     );

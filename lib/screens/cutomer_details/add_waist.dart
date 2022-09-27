@@ -3,6 +3,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tailor/screens/cutomer_details/add_arm_length.dart';
 import 'package:tailor/utils/widgets.dart';
 
+import 'customer_personal_details.dart';
+
 class AddWaist extends StatefulWidget {
   const AddWaist({Key? key}) : super(key: key);
 
@@ -29,6 +31,7 @@ class _AddWaistState extends State<AddWaist> {
           if (value == null || value!.isEmpty) {
             Fluttertoast.showToast(msg: 'Select Value');
           } else {
+            CustomerPersonalDetails.modelAddCustomer.waist = value!;
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const AddArmLength()));
           }
