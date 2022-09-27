@@ -49,7 +49,8 @@ class _AddCalfState extends State<AddCalf> {
               headerAnimationLoop: true,
               dialogType: DialogType.SUCCES,
               showCloseIcon: false,
-              autoDismiss: true,
+              dismissOnTouchOutside: false,
+              autoDismiss: false,
               // autoHide: const Duration(seconds: 3),
               title: 'Success',
               desc:
