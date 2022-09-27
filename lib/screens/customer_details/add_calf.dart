@@ -17,55 +17,65 @@ class _AddCalfState extends State<AddCalf> {
   String? value;
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     String collection = FirebaseAuth.instance.currentUser!.uid;
     return CommonWidgets.addCustomerDetails(
-        context: context,
-        list: CommonWidgets.generateList(10, 11),
-        stringAssetImg: 'assets/images/calf-removebg-preview.png',
-        name: 'Add Calf',
-        onPressed: (String? value) {
-          setState(() {
-            this.value = value;
+      context: context,
+      list: CommonWidgets.generateList(10, 11),
+      stringAssetImg: 'assets/images/calf-removebg-preview.png',
+      name: 'Add Calf',
+      value: value,
+      onPressed: (String? value) {
+        setState(() {
+          this.value = value;
+        });
+      },
+      nextOnPressed: () async {
+        if (value == null || value!.isEmpty) {
+          Fluttertoast.showToast(msg: 'Select Value');
+        } else {
+          CustomerPersonalDetails.modelAddCustomer.calf = value!;
+          await FirebaseFirestore.instance
+              .collection(collection)
+              .doc(CustomerPersonalDetails.modelAddCustomer.phoneNumber)
+              .set(CustomerPersonalDetails.modelAddCustomer.toMap())
+              .whenComplete(() {
+            print('//////////////////////success///////////////////');
+            AwesomeDialog(
+              width: width * 0.9,
+              context: context,
+              animType: AnimType.SCALE,
+              headerAnimationLoop: true,
+              dialogType: DialogType.SUCCES,
+              showCloseIcon: true,
+              autoDismiss: true,
+              autoHide: const Duration(seconds: 2),
+              title: 'Success',
+              desc:
+                  'Added ${CustomerPersonalDetails.modelAddCustomer.firstName}',
+              btnOkOnPress: () {},
+              btnOkIcon: Icons.check_circle,
+              onDissmissCallback: (type) {},
+            ).show();
+          }).onError((error, stackTrace) {
+            print('//////////////////////error///////$stackTrace////////////');
+            AwesomeDialog(
+              context: context,
+              animType: AnimType.SCALE,
+              headerAnimationLoop: false,
+              dialogType: DialogType.ERROR,
+              showCloseIcon: true,
+              //  autoDismiss: true,
+              autoHide: const Duration(seconds: 4),
+              title: 'Error',
+              desc: 'Error while adding. Check internet & try again',
+              btnOkOnPress: () {},
+              btnOkIcon: Icons.check_circle,
+              onDissmissCallback: (type) {},
+            ).show();
           });
-        },
-        nextOnPressed: () async {
-          if (value == null || value!.isEmpty) {
-            Fluttertoast.showToast(msg: 'Select Value');
-          } else {
-            CustomerPersonalDetails.modelAddCustomer.calf = value!;
-            await FirebaseFirestore.instance
-                .collection(collection)
-                .doc(CustomerPersonalDetails.modelAddCustomer.phoneNumber)
-                .set(CustomerPersonalDetails.modelAddCustomer.toMap())
-                .whenComplete(() {
-              AwesomeDialog(
-                context: context,
-                animType: AnimType.SCALE,
-                headerAnimationLoop: false,
-                dialogType: DialogType.SUCCES,
-                showCloseIcon: true,
-                //  autoDismiss: true,
-                autoHide: Duration(seconds: 3),
-                title: 'Succes',
-                desc:
-                    'Added ${CustomerPersonalDetails.modelAddCustomer.firstName}',
-                btnOkOnPress: () {
-                  debugPrint('OnClcik');
-                },
-                btnOkIcon: Icons.check_circle,
-                onDissmissCallback: (type) {
-                  debugPrint('Dialog Dissmiss from callback $type');
-                },
-              ).show();
-            }).onError((error, stackTrace) {
-              print('////////////////////////Error/////////////////////////');
-            });
-            print('${CustomerPersonalDetails.modelAddCustomer}');
-
-            // Navigator.push(context,
-            //     MaterialPageRoute(builder: (context) => const AddBiceps()));
-          }
-        },
-        value: value);
+        }
+      },
+    );
   }
 }
