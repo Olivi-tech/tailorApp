@@ -158,7 +158,7 @@ class _CustomerPersonalDetailsState extends State<CustomerPersonalDetails> {
                       },
                       btnBackGroundColor: Colors.brown,
                       width: width * 0.9,
-                      height: height * 0.06),
+                      height: height * 0.06)
                 ]),
           ),
         ),

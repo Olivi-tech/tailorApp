@@ -364,25 +364,7 @@ class _DashBoardState extends State<DashBoard> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      CustomerDetailPage(map: data)
-                                  //     CustomerDetailPage(
-                                  //   fullName: data['fullName'],
-                                  //   phoneNumber: data['phoneNumber'],
-                                  //   address: data['address'],
-                                  //   wrist: data['wrist'],
-                                  //   armLength: data['armLength'],
-                                  //   biceps: data['biceps'],
-                                  //   calf: data['calf'],
-                                  //   collar: data['collar'],
-                                  //   chest: data['chest'],
-                                  //   inseam: data['inseam'],
-                                  //   length: data['length'],
-                                  //   thigh: data['thigh'],
-                                  //   waist: data['waist'],
-                                  //   shoulder: data['shoulder'],
-                                  //   title: 'Customer Info',
-                                  // ),
-                                  ));
+                                      CustomerDetailPage(map: data)));
                           print(
                               '////////////////fullName////////// ${data['fullName']}/////////////////////////');
                           print(
@@ -414,7 +396,11 @@ class _DashBoardState extends State<DashBoard> {
                         }
                       },
                     ));
-              } else if (data['fullName']
+              } else if (data['firstName']
+                      .toString()
+                      .toLowerCase()
+                      .contains(searchedText.toLowerCase()) ||
+                  data['lastName']
                       .toString()
                       .toLowerCase()
                       .contains(searchedText.toLowerCase()) ||
@@ -427,9 +413,8 @@ class _DashBoardState extends State<DashBoard> {
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: ListTile(
                       title: Text(
-                        data[ModelAddCustomer.keyFirstName] +
-                                data[ModelAddCustomer.keyLastName] ??
-                            '',
+                        '${data[ModelAddCustomer.keyFirstName]} '
+                        ' ${data[ModelAddCustomer.keyLastName]}',
                         style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -558,9 +543,6 @@ class _DashBoardState extends State<DashBoard> {
               isDismissible: false,
               enableDrag: false,
               isScrollControlled: true,
-              // shape: const RoundedRectangleBorder(
-              //     borderRadius:
-              //         BorderRadius.vertical(top: Radius.circular(20))),
               builder: (context) => const CustomerPersonalDetails());
         },
         child: const Icon(Icons.add),
@@ -630,7 +612,7 @@ class _DashBoardState extends State<DashBoard> {
         autofocus: true,
         decoration: InputDecoration(
           hintStyle: const TextStyle(fontSize: 16),
-          hintText: 'first name or phone',
+          hintText: 'name or phone',
           suffixIcon: _searchController.text.isNotEmpty
               ? IconButton(
                   onPressed: () {
