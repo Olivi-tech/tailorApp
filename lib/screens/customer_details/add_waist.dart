@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tailor/screens/cutomer_details/add_arm_length.dart';
+import 'package:tailor/screens/customer_details/add_arm_length.dart';
 import 'package:tailor/utils/widgets.dart';
-
 import 'customer_personal_details.dart';
 
 class AddWaist extends StatefulWidget {

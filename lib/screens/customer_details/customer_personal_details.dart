@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tailor/screens/cutomer_details/add_neck.dart';
+import 'package:tailor/screens/customer_details/add_neck.dart';
 import 'package:tailor/screens/model_add_customer.dart';
 import 'package:tailor/utils/widgets.dart';
 

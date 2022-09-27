@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tailor/screens/cutomer_details/add_length.dart';
-import 'package:tailor/screens/cutomer_details/customer_personal_details.dart';
+import 'package:tailor/screens/customer_details/add_thigh.dart';
+import 'package:tailor/screens/customer_details/customer_personal_details.dart';
 import 'package:tailor/utils/widgets.dart';
 
-class AddWrist extends StatefulWidget {
-  const AddWrist({Key? key}) : super(key: key);
+class AddLength extends StatefulWidget {
+  const AddLength({Key? key}) : super(key: key);
 
   @override
-  State<AddWrist> createState() => _AddWristState();
+  State<AddLength> createState() => _AddLengthState();
 }
 
-class _AddWristState extends State<AddWrist> {
+class _AddLengthState extends State<AddLength> {
   String? value;
   @override
   Widget build(BuildContext context) {
     return CommonWidgets.addCustomerDetails(
         context: context,
-        list: CommonWidgets.generateList(5, 5),
-        stringAssetImg: 'assets/images/wrist-removebg-preview.png',
-        name: 'Wrist',
+        list: CommonWidgets.generateList(11, 20),
+        stringAssetImg: 'assets/images/shirt_length-removebg-preview.png',
+        name: 'Shirt Length',
         onPressed: (String? value) {
           setState(() {
             this.value = value;
@@ -29,9 +29,9 @@ class _AddWristState extends State<AddWrist> {
           if (value == null || value!.isEmpty) {
             Fluttertoast.showToast(msg: 'Select Value');
           } else {
-            CustomerPersonalDetails.modelAddCustomer.wrist = value!;
+            CustomerPersonalDetails.modelAddCustomer.length = value!;
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const AddLength()));
+                MaterialPageRoute(builder: (context) => const AddThigh()));
           }
         },
         value: value);

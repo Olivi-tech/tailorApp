@@ -4,9 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tailor/account_creations/login_provider.dart';
 import 'package:tailor/screens/customer_detail_page.dart';
-import 'package:tailor/screens/cutomer_details/customer_personal_details.dart';
+import 'package:tailor/screens/customer_details/customer_personal_details.dart';
 import 'package:tailor/screens/model_add_customer.dart';
-import 'package:tailor/utils/widgets.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);

@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tailor/screens/cutomer_details/add_calf.dart';
-import 'package:tailor/screens/cutomer_details/customer_personal_details.dart';
+import 'package:tailor/screens/customer_details/add_inseam.dart';
+import 'package:tailor/screens/customer_details/customer_personal_details.dart';
 import 'package:tailor/utils/widgets.dart';
 
-class AddInseam extends StatefulWidget {
-  const AddInseam({Key? key}) : super(key: key);
+class AddThigh extends StatefulWidget {
+  const AddThigh({Key? key}) : super(key: key);
 
   @override
-  State<AddInseam> createState() => _AddInseamState();
+  State<AddThigh> createState() => _AddThighState();
 }
 
-class _AddInseamState extends State<AddInseam> {
+class _AddThighState extends State<AddThigh> {
   String? value;
   @override
   Widget build(BuildContext context) {
     return CommonWidgets.addCustomerDetails(
         context: context,
-        list: CommonWidgets.generateList(18, 23),
-        stringAssetImg: 'assets/images/inseam-removebg-preview.png',
-        name: 'Inseam',
+        list: CommonWidgets.generateList(15, 14),
+        stringAssetImg: 'assets/images/thigh-removebg-preview.png',
+        name: 'Thigh',
         onPressed: (String? value) {
           setState(() {
             this.value = value;
@@ -29,10 +29,9 @@ class _AddInseamState extends State<AddInseam> {
           if (value == null || value!.isEmpty) {
             Fluttertoast.showToast(msg: 'Select Value');
           } else {
-            CustomerPersonalDetails.modelAddCustomer.inseam = value!;
-
+            CustomerPersonalDetails.modelAddCustomer.thigh = value!;
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const AddCalf()));
+                MaterialPageRoute(builder: (context) => const AddInseam()));
           }
         },
         value: value);
