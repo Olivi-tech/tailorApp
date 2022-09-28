@@ -299,8 +299,8 @@ class _DashBoardState extends State<DashBoard> {
                     child: ListTile(
                       title: Text(
                         data[ModelAddCustomer.keyFirstName] +
-                                data[ModelAddCustomer.keyLastName] ??
-                            '',
+                            ' ' +
+                            data[ModelAddCustomer.keyLastName],
                         style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,

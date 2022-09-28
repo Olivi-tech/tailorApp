@@ -80,7 +80,8 @@ class CommonWidgets {
           prefixIcon: prefixIcon,
           hintStyle: hintStyle,
           suffixIcon: suffixIcon,
-          border: InputBorder.none, focusedBorder: InputBorder.none,
+          border: InputBorder.none,
+          focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
           errorBorder: InputBorder.none,
           disabledBorder: InputBorder.none,
@@ -93,34 +94,37 @@ class CommonWidgets {
     );
   }
 
-  static String? customValidator(String? value) {
-    if (value!.isEmpty || value.length < 6) {
-      return 'value must be greater or equal to 6';
-    } else if (value.length > 30 && value.length > 6) {
-      return 'Value Can\'t be greater than 30 characters';
-    }
-    return null;
-  }
-
-  static String? customValidatorForMeasurementTile(String? value) {
-    if (value!.isEmpty || value.length < 2) {
-      return 'keep more than 1';
-    } else if (value.length > 4) {
-      return 'keep less than 5';
-    }
-    return null;
-  }
+  // static String? customValidator(String? value) {
+  //   if (value!.isEmpty || value.length < 6) {
+  //     return 'value must be greater or equal to 6';
+  //   } else if (value.length > 30 && value.length > 6) {
+  //     return 'Value Can\'t be greater than 30 characters';
+  //   }
+  //   return null;
+  // }
+  //
+  // static String? customValidatorForMeasurementTile(String? value) {
+  //   if (value!.isEmpty || value.length < 2) {
+  //     return 'keep more than 1';
+  //   } else if (value.length > 4) {
+  //     return 'keep less than 5';
+  //   }
+  //   return null;
+  // }
 
   static Widget customMeasurementTile(
       {required String stringAssetImage,
       required String title,
-      String? initialValue,
-      required String? Function(String?)? validator,
+      required String initialValue,
+      required List list,
+      required void Function(String?)? onChanged,
+      String? Function(String?)? validator,
       required TextEditingController controller}) {
     return ListTile(
       tileColor: Colors.black26,
       contentPadding: const EdgeInsets.only(left: 0.0, right: 3),
       leading: CircleAvatar(
+        backgroundColor: Colors.grey,
         backgroundImage: AssetImage(stringAssetImage),
         radius: 27.5,
       ),
@@ -133,24 +137,48 @@ class CommonWidgets {
         // style: TextStyle(color: Colors.redAccent),
       ),
       trailing: SizedBox(
+        width: 90,
         height: 50,
-        width: 130,
-        // color: Colors.green,
-        child: TextFormField(
-          keyboardType: TextInputType.number,
-          validator: validator,
-          initialValue: initialValue,
-          controller: controller,
-          textInputAction: TextInputAction.done,
-          decoration: InputDecoration(
-              hintText: 'inch...',
-              contentPadding: const EdgeInsets.only(
-                  left: 7, top: 10, right: 0.0, bottom: 0.0),
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: const BorderSide(color: Colors.deepPurple))),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton(
+              hint: Text(
+                initialValue,
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Colors.black),
+              ),
+              iconSize: 30,
+              items: list.map<DropdownMenuItem<String>>((dynamic value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              value: initialValue,
+              isExpanded: true,
+              onChanged: onChanged),
         ),
       ),
+      // trailing: SizedBox(
+      //   height: 50,
+      //   width: 130,
+      //   // color: Colors.green,
+      //   child: TextFormField(
+      //     keyboardType: TextInputType.number,
+      //     validator: validator,
+      //     initialValue: initialValue,
+      //     controller: controller,
+      //     textInputAction: TextInputAction.done,
+      //     decoration: InputDecoration(
+      //         hintText: 'inch...',
+      //         contentPadding: const EdgeInsets.only(
+      //             left: 7, top: 10, right: 0.0, bottom: 0.0),
+      //         border: OutlineInputBorder(
+      //             borderRadius: BorderRadius.circular(5),
+      //             borderSide: const BorderSide(color: Colors.deepPurple))),
+      //   ),
+      // ),
     );
   }
 

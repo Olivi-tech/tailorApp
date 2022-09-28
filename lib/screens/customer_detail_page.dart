@@ -48,18 +48,20 @@ class CustomerDetailPage extends StatelessWidget {
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                splashFactory: InkSplash.splashFactory,
-                fixedSize: const Size(60, 20),
-                backgroundColor: Colors.teal,
+                //  primary: Colors.indigoAccent,
+                textStyle: const TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.black),
+                fixedSize: Size(80, 5),
+                // minimumSize: const Size(100, 50),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50))),
+                  borderRadius: BorderRadius.circular(10),
+                )),
             onPressed: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => AddItem(
                             map: map,
-                            editing: true,
                           )));
             },
             child: const Text(
